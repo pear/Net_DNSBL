@@ -29,7 +29,7 @@
  * @author  Sebastian Nohn <sebastian@nohn.net>
  * @package Net_DNSBL
  * @license http://www.php.net/license/3_0.txt
- * @version 0.4
+ * @version 0.5
  */
 require_once 'Cache.php';
 require_once 'HTTP/Request.php';
@@ -77,7 +77,8 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
      * @access protected
      * @return boolean True if the host is whitelisted
      */
-    function isDoubleCcTld($fqdn) {
+    function isDoubleCcTld($fqdn)
+    {
         // 30 Day should be way enough
         $options = array('lifeTime' => 2);
         $id = md5($this->doubleCcTldFile);
@@ -119,7 +120,8 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
      * @access protected
      * @return string Host to lookup
      */
-    function getHostForLookup($uri, $blacklist) {
+    function getHostForLookup($uri, $blacklist) 
+    {
         $host       = '';
         // (1) Extract the hostname from the given URI
         $parsed_uri = parse_url($uri);

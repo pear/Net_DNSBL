@@ -30,7 +30,7 @@
  * @author  Sebastian Nohn <sebastian@nohn.net>
  * @package Net_DNSBL
  * @license http://www.php.net/license/3_0.txt
- * @version 0.4
+ * @version 0.5
  */
 require_once 'Net/CheckIP.php';
 
@@ -54,7 +54,8 @@ class Net_DNSBL {
      * @access public
      * @return bool true if the operation was successful
      */
-    function setRBL($blacklists) {
+    function setRBL($blacklists)
+    {
         if (is_array($blacklists)) {
             $this->blacklists = $blacklists;
             return true;
@@ -69,7 +70,8 @@ class Net_DNSBL {
      * @access public
      * @return array Currently set blacklists.
      */
-    function getRBL() {
+    function getRBL()
+    {
         return $this->blacklists;
     }
 
@@ -81,7 +83,8 @@ class Net_DNSBL {
      * @access public
      * @return boolean true if the checked host is listed in some blacklist.
      */
-    function isListed($host) {
+    function isListed($host)
+    {
         
         $isListed = false;
         
@@ -108,7 +111,8 @@ class Net_DNSBL {
      * @access protected
      * @return string Ready to use host to lookup
      */    
-    function getHostForLookup($host, $blacklist) {
+    function getHostForLookup($host, $blacklist) 
+    {
         if (!Net_CheckIP::check_ip($host)) {
             $ip = gethostbyname($host);
         } else {
@@ -126,7 +130,8 @@ class Net_DNSBL {
      * @access protected
      * @return string Ready to use host to lookup
      */    
-    function buildLookUpHost($ip, $blacklist) {
+    function buildLookUpHost($ip, $blacklist)
+    {
         return $this->reverseIp($ip).'.'.$blacklist;        
     } // function
 
@@ -137,7 +142,8 @@ class Net_DNSBL {
      * @access protected
      * @return string Reversed IP
      */    
-    function reverseIp($ip) {        
+    function reverseIp($ip) 
+    {        
         return implode('.', array_reverse(explode('.', $ip)));        
     } // function
 
