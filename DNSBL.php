@@ -30,7 +30,7 @@
  * @author  Sebastian Nohn <sebastian@nohn.net>
  * @package Net_DNSBL
  * @license http://www.php.net/license/3_0.txt
- * @version 0.5.1
+ * @version 0.5.3
  */
 require_once 'Net/CheckIP.php';
 
@@ -54,7 +54,7 @@ class Net_DNSBL {
      * @access public
      * @return bool true if the operation was successful
      */
-    function setRBL($blacklists)
+    function setBlacklists($blacklists)
     {
         if (is_array($blacklists)) {
             $this->blacklists = $blacklists;
@@ -70,18 +70,18 @@ class Net_DNSBL {
      * @access public
      * @return array Currently set blacklists.
      */
-    function getRBL()
+    function getBlacklists()
     {
         return $this->blacklists;
     }
 
     /** 
-     * Checks if the supplied Host is listen in one or more of the
-     * RBLs
+     * Checks if the supplied Host is listed in one or more of the
+     * RBLs.
      *
      * @param  string Host to check for being listed.
      * @access public
-     * @return boolean true if the checked host is listed in some blacklist.
+     * @return boolean true if the checked host is listed in a blacklist.
      */
     function isListed($host)
     {
@@ -102,9 +102,9 @@ class Net_DNSBL {
         return $isListed;
     } // function
 
-    /**
-     * Get thublice host to lookup. Lookup a host if neccessary and get the
-     * complete FQDN to lookup
+    /** 
+     * Get host to lookup. Lookup a host if neccessary and get the
+     * complete FQDN to lookup.
      *
      * @param  string Host OR IP to use for building the lookup.
      * @param  string Blacklist to use for building the lookup.
@@ -113,6 +113,7 @@ class Net_DNSBL {
      */    
     function getHostForLookup($host, $blacklist) 
     {
+        // Currently only works for v4 addresses.
         if (!Net_CheckIP::check_ip($host)) {
             $ip = gethostbyname($host);
         } else {
@@ -136,7 +137,8 @@ class Net_DNSBL {
     } // function
 
     /**
-     * Reverse the order of an IP. 127.0.0.1 -> 1.0.0.127
+     * Reverse the order of an IP. 127.0.0.1 -> 1.0.0.127. Currently
+     * only works for v4-adresses
      *
      * @param  string IP to reverse.
      * @access protected

@@ -29,7 +29,7 @@
  * @author  Sebastian Nohn <sebastian@nohn.net>
  * @package Net_DNSBL
  * @license http://www.php.net/license/3_0.txt
- * @version 0.5.1
+ * @version 0.5.3
  */
 require_once 'Cache.php';
 require_once 'HTTP/Request.php';
@@ -49,7 +49,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
     var $blacklists = array('multi.surbl.org');
 
     /**
-     * File containing whitelisted hosts
+     * File containing whitelisted hosts.
      *
      * There are some whitelisted hosts (co.uk for example). This
      * requires the package to not ask the domain name but the host
@@ -62,7 +62,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
     var $doubleCcTldFile = 'http://spamcheck.freeapp.net/two-level-tlds';
 
     /**
-     * Array of whitelisted hosts
+     * Array of whitelisted hosts.
      *
      * @var    array
      * @see    $twoLevelCcTldFile
@@ -71,7 +71,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
     var $twoLevelCcTld = array();
 
     /**
-     * Check if the last two parts of the FQDN are whitelisted
+     * Check if the last two parts of the FQDN are whitelisted.
      *
      * @param  string Host to check if it is whitelisted
      * @access protected
@@ -104,7 +104,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
     } // function
 
     /**
-     * Get Hostname to ask for
+     * Get Hostname to ask for.
      *
      * Performs the following steps:
      *
@@ -114,7 +114,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
      * (3b) IS_FQDN Check if is in "CC-2-level-TLD"
      * (3b1) IS_IN_2LEVEL: we want the last three names
      * (3b2) IS_NOT_2LEVEL: we want the last two names
-     * (4) return the FQDN to query
+     * (4) return the FQDN to query.
      *
      * @param  string URL to check. 
      * @access protected
