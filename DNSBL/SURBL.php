@@ -29,9 +29,9 @@
  * @author  Sebastian Nohn <sebastian@nohn.net>
  * @package Net_DNSBL
  * @license http://www.php.net/license/3_0.txt
- * @version 0.5.3
+ * @version 0.5.4
  */
-require_once 'Cache.php';
+require_once 'Cache/Lite.php';
 require_once 'HTTP/Request.php';
 require_once 'Net/CheckIP.php';
 require_once 'Net/DNSBL.php';
@@ -79,11 +79,14 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
      */
     function isDoubleCcTld($fqdn)
     {
-        // 30 Day should be way enough
-        $options = array('lifeTime' => 2);
+        // 30 Days should be way enough
+        $options = array(
+                         'lifeTime' => '2592000',
+                         'automaticSerialization' => true
+                         );
         $id = md5($this->doubleCcTldFile);
 
-        $cache = new Cache('file', $options);
+        $cache = new Cache_Lite($options);
         if ($data = $cache->get($id)) {
             // Cache hit
         } else {
@@ -94,7 +97,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
             }
             $data = explode("\n", $data);
             $data = array_flip($data);
-            $cache->save($id, $data);
+            $cache->save($data, $id);
         } // if 
         if (array_key_exists($fqdn, $data)) {
             return true;
