@@ -119,10 +119,10 @@
   </filelist>
   </release>
   <release>
-    <version>1.0.0</version>
+    <version>0.5.1</version>
     <date>2004-11-28</date>
     <license>PHP License</license>
-    <state>stable</state>
+    <state>beta</state>
     <notes>* Fixed coding standards issues
            * Made stable as the package is documented</notes>
     <deps>
