@@ -29,7 +29,7 @@
  * @author  Sebastian Nohn <sebastian@nohn.net>
  * @package Net_DNSBL
  * @license http://www.php.net/license/3_0.txt
- * @version 0.5
+ * @version 1.0.0
  */
 require_once 'Cache.php';
 require_once 'HTTP/Request.php';
