@@ -124,7 +124,7 @@
     <license>PHP License</license>
     <state>beta</state>
     <notes>* Fixed coding standards issues
-           * Made stable as the package is documented</notes>
+           * Made beta as the package is documented and proven to work but the guidelines don't allow to make the first release stable</notes>
     <deps>
       <dep type="pkg" rel="ge" version="1.5.4">Cache</dep>
       <dep type="pkg" rel="ge" version="1.1">Net_CheckIP</dep>
