@@ -3,7 +3,7 @@
 // +----------------------------------------------------------------------+
 // | PEAR::Net_DNSBL                                                      |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2004 Sebastian Nohn <sebastian@nohn.net>               |
+// | Copyright (c) 2004-2005 Sebastian Nohn <sebastian@nohn.net>          |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -30,7 +30,7 @@
  * @author  Sebastian Nohn <sebastian@nohn.net>
  * @package Net_DNSBL
  * @license http://www.php.net/license/3_0.txt
- * @version 0.5.3
+ * @version 1.1.0
  */
 require_once 'Net/CheckIP.php';
 
@@ -46,6 +46,14 @@ class Net_DNSBL {
      */
     var $blacklists = array('sbl-xbl.spamhaus.net',
                             'bl.spamcop.net');
+
+    /**     
+     * Array of Results
+     *
+     * @var    array
+     * @access protected
+     */
+    var $results    = array();
 
     /**
      * Set the blacklist to a desired blacklist.
@@ -76,6 +84,24 @@ class Net_DNSBL {
     }
 
     /** 
+     * Returns Blacklist and Reply from the Blacklist, a host is listed in.
+     *
+     * @param  string Host to check
+     * @access public
+     * @return array result. $result['dnsbl'] contains DNSBL,
+     *               $result['record'] contains returned DNS record.
+     */
+    function getDetails($host)
+    {
+        if (isset($results[$host]['dnsbl'])) {
+            return $results[$host];
+        } else {
+            return false;
+        }
+    } // function
+
+
+    /** 
      * Checks if the supplied Host is listed in one or more of the
      * RBLs.
      *
@@ -92,7 +118,9 @@ class Net_DNSBL {
             $result = gethostbyname($this->getHostForLookup($host, $blacklist));
             if ($result != $this->getHostForLookup($host, $blacklist)) { 
                 $isListed = true;
-                
+                $results[$host]['dnsbl']  = $blacklist;
+                $results[$host]['record'] = $result;
+                // $results[$host]['txt']    = 'FIXXME';
                 //if the Host was listed we don't need to check other RBLs,
                 break;
                 
