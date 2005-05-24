@@ -1,22 +1,33 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-// +----------------------------------------------------------------------+
-// | PEAR::Net_DNSBL                                                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2004-2005 Sebastian Nohn <sebastian@nohn.net>          |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 3.0 of the PHP license,       |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available through the world-wide-web at the following url:           |
-// | http://www.php.net/license/3_0.txt.                                  |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Authors: Sebastian Nohn <sebastian@nohn.net>                         |
-// +----------------------------------------------------------------------+
-//
-// $Id$
+
+/**
+ * Short description for file
+ *
+ * Long description for file (if any)...
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
+ * @category   CategoryName
+ * @package    PackageName
+ * @author     Original Author <author@example.com>
+ * @author     Another Author <another@example.com>
+ * @copyright  1997-2005 The PHP Group
+ * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @version    CVS: $Id$
+ * @link       http://pear.php.net/package/PackageName
+ * @see        NetOther, Net_Sample::Net_Sample()
+ * @since      File available since Release 1.2.0
+ * @deprecated File deprecated in Release 2.0.0
+ */
+
 
 /**
  * PEAR::Net_DNSBL
@@ -24,14 +35,29 @@
  * This class acts as interface to generic Realtime Blocking Lists
  * (RBL)
  *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
  * Net_RBL looks up an supplied host if it's listed in 1-n supplied
  * Blacklists
  *
- * @author  Sebastian Nohn <sebastian@nohn.net>
- * @package Net_DNSBL
- * @license http://www.php.net/license/3_0.txt
- * @version 1.1.0
+ * @category   Net
+ * @package    DNSBL
+ * @author     Sebastian Nohn <sebastian@nohn.net>
+ * @author     Ammar Ibrahim <fixxme@fixme.com>
+ * @copyright  2004-2005 Sebastian Nohn <sebastian@nohn.net>
+ * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @version    CVS: $Id$
+ * @link       http://pear.php.net/package/Net_DNSBL
+ * @see        Net_DNS
+ * @since      File available since Release 1.0.0
  */
+
 require_once 'Net/CheckIP.php';
 
 class Net_DNSBL {
