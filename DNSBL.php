@@ -70,7 +70,7 @@ class Net_DNSBL {
      * @var    array
      * @access protected
      */
-    var $blacklists = array('sbl-xbl.spamhaus.net',
+    var $blacklists = array('sbl-xbl.spamhaus.org',
                             'bl.spamcop.net');
 
     /**     
