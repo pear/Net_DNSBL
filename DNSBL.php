@@ -23,7 +23,7 @@
  * @package    DNSBL
  * @author     Sebastian Nohn <sebastian@nohn.net>
  * @author     Ammar Ibrahim <fixxme@fixme.com>
- * @copyright  2004-2005 Sebastian Nohn <sebastian@nohn.net>
+ * @copyright  2004-2006 Sebastian Nohn <sebastian@nohn.net>
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
  * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Net_DNSBL
@@ -92,8 +92,8 @@ class Net_DNSBL {
      */
     function getDetails($host)
     {
-        if (isset($results[$host]['dnsbl'])) {
-            return $results[$host];
+        if (isset($this->results[$host]['dnsbl'])) {
+            return $this->results[$host];
         } else {
             return false;
         }
@@ -117,8 +117,8 @@ class Net_DNSBL {
             $result = gethostbyname($this->getHostForLookup($host, $blacklist));
             if ($result != $this->getHostForLookup($host, $blacklist)) { 
                 $isListed = true;
-                $results[$host]['dnsbl']  = $blacklist;
-                $results[$host]['record'] = $result;
+                $this->results[$host]['dnsbl']  = $blacklist;
+                $this->results[$host]['record'] = $result;
                 // $results[$host]['txt']    = 'FIXXME';
                 //if the Host was listed we don't need to check other RBLs,
                 break;
