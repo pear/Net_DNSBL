@@ -15,7 +15,7 @@
 // $Id$
 //
 
-require_once "Net/DNSBL/SURBL.php";
+require_once "../DNSBL/SURBL.php";
 require_once "PHPUnit2/Framework/TestCase.php";
 
 class testNetDNSBLSURBL extends PHPUnit2_Framework_TestCase {
