@@ -1,0 +1,12 @@
+<project name="PEAR_Net_DNSBL" default="build" basedir=".">
+  <target name="build">
+    <cvs cvsRoot=":pserver:nohn@cvs.php.net:/repository"
+         command="up -A -d" />
+    <exec dir="${basedir}/tests/" executable="phpunit" failonerror="true">
+        <arg line="--log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml testNetDNSBL" />
+    </exec>
+    <exec dir="${basedir}/tests/" executable="phpunit" failonerror="true">
+        <arg line="--log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl_surbl.xml testNetDNSBLSURBL" />
+    </exec>
+  </target>
+</project>
