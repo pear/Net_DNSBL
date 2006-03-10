@@ -36,7 +36,7 @@
     <dir name="DNSBL" role="php">
       <file role="php" name="SURBL.php" />
     </dir>
-    <dir name="Tests" role="test">
+    <dir name="tests" role="test">
      <file name="testNetDNSBL.php" />
      <file name="testNetDNSBLSURBL.php" />
     </dir>
@@ -61,7 +61,7 @@
     <dir name="DNSBL" role="php">
       <file role="php" name="SURBL.php" />
     </dir>
-    <dir name="Tests" role="test">
+    <dir name="tests" role="test">
      <file name="testNetDNSBL.php" />
      <file name="testNetDNSBLSURBL.php" />
     </dir>
@@ -86,7 +86,7 @@
     <dir name="DNSBL" role="php">
       <file role="php" name="SURBL.php" />
     </dir>
-    <dir name="Tests" role="test">
+    <dir name="tests" role="test">
      <file name="testNetDNSBL.php" />
      <file name="testNetDNSBLSURBL.php" />
     </dir>
@@ -111,7 +111,7 @@
     <dir name="DNSBL" role="php">
       <file role="php" name="SURBL.php" />
     </dir>
-    <dir name="Tests" role="test">
+    <dir name="tests" role="test">
      <file name="testNetDNSBL.php" />
      <file name="testNetDNSBLSURBL.php" />
     </dir>
@@ -137,7 +137,7 @@
     <dir name="DNSBL" role="php">
       <file role="php" name="SURBL.php" />
     </dir>
-    <dir name="Tests" role="test">
+    <dir name="tests" role="test">
      <file name="testNetDNSBL.php" />
      <file name="testNetDNSBLSURBL.php" />
     </dir>
@@ -247,9 +247,9 @@
   </release>
   <release>
     <version>1.1.0beta1</version>
-    <date>2005-05-19</date>
+    <date>2006-03-10</date>
     <license>PHP License</license>
-    <state>stable</state>
+    <state>beta</state>
     <notes>* Get more Details</notes>
     <deps>
       <dep type="pkg" rel="ge" version="1.4.1">Cache_Lite</dep>
