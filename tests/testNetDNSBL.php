@@ -39,5 +39,18 @@ class testNetDNSBL extends PHPUnit2_Framework_TestCase {
         $this->assertEquals(false, $this->rbl->getDetails("mail.nohn.net"));
         $this->assertEquals(false, $this->rbl->getDetails("somehost.we.never.queried"));
     }
+
+    public function testGetListingBl() {
+        $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
+        $this->assertEquals(true,  $this->rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertEquals("dnsbl.sorbs.net",  $this->rbl->getListingBl("p50927464.dip.t-dialin.net"));
+    } // function
+
+    public function getListingRecord() {
+        $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
+        $this->assertEquals(true,  $this->rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertEquals("127.0.0.10",  $this->rbl->getListingRecord("p50927464.dip.t-dialin.net"));
+    } // function
+
 }
 ?>

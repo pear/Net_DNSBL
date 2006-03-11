@@ -99,6 +99,38 @@ class Net_DNSBL {
         }
     } // function
 
+    /**
+     * Returns Blacklist, host is listed in.
+     *
+     * @param  string Host to check
+     * @access public
+     * @return bl, a host is listed in or false
+     */
+    function getListingBl($host)
+    {
+        if (isset($this->results[$host]['dnsbl'])) {
+            return $this->results[$host]['dnsbl'];
+        } else {
+            return false;
+        }
+    } // function
+
+    /**
+     * Returns result, when a host is listed.
+     *
+     * @param  string Host to check
+     * @access public
+     * @return bl, a host is listed in or false
+     */
+    function getListingRecord($host)
+    {
+        if (isset($this->results[$host]['record'])) {
+            return $this->results[$host]['record'];
+        } else {
+            return false;
+        }
+    } // function
+
 
     /** 
      * Checks if the supplied Host is listed in one or more of the
