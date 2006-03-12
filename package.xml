@@ -3,7 +3,7 @@
 <package version="1.0">
   <name>Net_DNSBL</name>
   <summary>DNSBL Checker</summary>
-  <description>Checks if a given Host or URL is listed on an DNSBL or SURBL</description>
+  <description>Checks if a given Host or URL is listed on an DNS-based Blackhole List (DNSBL, Real-time Blackhole List or RBL) or Spam URI Realtime Blocklist (SURBL)</description>
   <maintainers>
     <maintainer>
       <user>nohn</user>
