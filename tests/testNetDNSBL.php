@@ -1,5 +1,5 @@
 <?php
-require_once "../DNSBL.php";
+require_once "Net/DNSBL.php";
 require_once "PHPUnit2/Framework/TestCase.php";
 
 class testNetDNSBL extends PHPUnit2_Framework_TestCase {
