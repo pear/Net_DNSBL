@@ -4,7 +4,7 @@
          command="up -A -d" />
   </target>
   <target name="test" depends="update">
-    <exec dir="${basedir}/tests/" executable="phpunit" failonerror="true">
+    <exec dir="${basedir}/tests/" executable="php" failonerror="true">
         <arg line="--log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml AllTests.php" />
     </exec>
   </target>
