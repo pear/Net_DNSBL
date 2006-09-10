@@ -5,10 +5,7 @@
   </target>
   <target name="test" depends="update">
     <exec dir="${basedir}/tests/" executable="phpunit" failonerror="true">
-        <arg line="--log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml testNetDNSBL" />
-    </exec>
-    <exec dir="${basedir}/tests/" executable="phpunit" failonerror="true">
-        <arg line="--log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl_surbl.xml testNetDNSBLSURBL" />
+        <arg line="--log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml AllTests.php" />
     </exec>
   </target>
   <target name="build" depends="test">
