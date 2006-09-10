@@ -1,8 +1,8 @@
 <?php
 require_once "Net/DNSBL.php";
-require_once "PHPUnit2/Framework/TestCase.php";
+require_once "PHPUnit/Framework/TestCase.php";
 
-class testNetDNSBL extends PHPUnit2_Framework_TestCase {
+class testNetDNSBL extends PHPUnit_Framework_TestCase {
     private $rbl;
     
     protected function setUp() {
@@ -21,8 +21,9 @@ class testNetDNSBL extends PHPUnit2_Framework_TestCase {
     }
 
     public function testSetters() {
-        $this->rbl->setBlacklists(array('dun.dnsrbl.net'));
+        $this->assertEquals(true, $this->rbl->setBlacklists(array('dun.dnsrbl.net')));
         $this->assertEquals(array('dun.dnsrbl.net'), $this->rbl->getBlacklists());
+        $this->assertEquals(false, $this->rbl->setBlacklists('dnsbl.sorbs.net'));
     }
 
     public function testSettersAndLookups() {
@@ -44,13 +45,14 @@ class testNetDNSBL extends PHPUnit2_Framework_TestCase {
         $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
         $this->assertEquals(true,  $this->rbl->isListed("p50927464.dip.t-dialin.net"));
         $this->assertEquals("dnsbl.sorbs.net",  $this->rbl->getListingBl("p50927464.dip.t-dialin.net"));
-    } // function
+        $this->assertEquals(false,  $this->rbl->getListingBl("www.google.de"));
+    }
 
-    public function getListingRecord() {
+    public function testGetListingRecord() {
         $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
         $this->assertEquals(true,  $this->rbl->isListed("p50927464.dip.t-dialin.net"));
         $this->assertEquals("127.0.0.10",  $this->rbl->getListingRecord("p50927464.dip.t-dialin.net"));
-    } // function
-
+        $this->assertEquals(false,  $this->rbl->getListingRecord("www.google.de"));
+    }
 }
 ?>

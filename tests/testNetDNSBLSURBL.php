@@ -16,9 +16,9 @@
 //
 
 require_once "Net/DNSBL/SURBL.php";
-require_once "PHPUnit2/Framework/TestCase.php";
+require_once "PHPUnit/Framework/TestCase.php";
 
-class testNetDNSBLSURBL extends PHPUnit2_Framework_TestCase {
+class testNetDNSBLSURBL extends PHPUnit_Framework_TestCase {
     private $surbl;
     
     protected function setUp() {
