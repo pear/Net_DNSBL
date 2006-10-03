@@ -1,14 +1,15 @@
+
 <project name="PEAR_Net_DNSBL" default="build" basedir=".">
   <target name="update">
     <cvs cvsRoot=":pserver:nohn@cvs.php.net:/repository"
          command="up -A -d" />
   </target>
-  <target name="test" depends="update">
-    <exec dir="${basedir}/tests/" executable="phpunit" failonerror="true">
-        <arg line="--log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml AllTests.php" />
+  <target name="test">
+    <exec dir="${basedir}" executable="phpunit" failonerror="true">
+        <arg line="-d include_path=.:${basedir}:/opt/php/lib/php --log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml --report ${basedir}/build/report AllTests tests/AllTests.php" />
     </exec>
   </target>
-  <target name="build" depends="test">
+  <target name="build" depends="update, test">
     <exec dir="${basedir}" executable="pear" failonerror="true">
         <arg line="package" />
     </exec>
