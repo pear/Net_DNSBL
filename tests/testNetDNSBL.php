@@ -54,5 +54,14 @@ class testNetDNSBL extends PHPUnit_Framework_TestCase {
         $this->assertEquals("127.0.0.10",  $this->rbl->getListingRecord("p50927464.dip.t-dialin.net"));
         $this->assertEquals(false,  $this->rbl->getListingRecord("www.google.de"));
     }
+
+    public function testMultipleBlacklists() {
+        $this->rbl->setBlackLists(array(
+                                        'sbl-xbl.spamhaus.org',
+                                        'bl.spamcop.net'
+                                        ));
+        $this->assertFalse($this->rbl->isListed('212.112.226.205'));
+        $this->assertFalse($this->rbl->getListingBl('212.112.226.205'));
+    }
 }
 ?>
