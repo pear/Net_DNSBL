@@ -10,49 +10,49 @@ class testNetDNSBL extends PHPUnit_Framework_TestCase {
     }
     
     public function testHostsAlwaysAreListed() {
-        $this->assertEquals(true,  $this->rbl->isListed("127.0.0.2"));
+        $this->assertTrue($this->rbl->isListed("127.0.0.2"));
     }
 
     public function testTrustworthyHostsArentListed() {
         $this->rbl->setBlacklists(array('dun.dnsrbl.net'));
-        $this->assertEquals(false, $this->rbl->isListed("mail.nohn.net"));
-        $this->assertEquals(false, $this->rbl->isListed("212.112.226.205"));
-        $this->assertEquals(false, $this->rbl->isListed("smtp1.google.com"));
+        $this->assertFalse($this->rbl->isListed("mail.nohn.net"));
+        $this->assertFalse($this->rbl->isListed("212.112.226.205"));
+        $this->assertFalse($this->rbl->isListed("smtp1.google.com"));
     }
 
     public function testSetters() {
-        $this->assertEquals(true, $this->rbl->setBlacklists(array('dun.dnsrbl.net')));
+        $this->assertTrue($this->rbl->setBlacklists(array('dun.dnsrbl.net')));
         $this->assertEquals(array('dun.dnsrbl.net'), $this->rbl->getBlacklists());
-        $this->assertEquals(false, $this->rbl->setBlacklists('dnsbl.sorbs.net'));
+        $this->assertFalse($this->rbl->setBlacklists('dnsbl.sorbs.net'));
     }
 
     public function testSettersAndLookups() {
         $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
         $this->assertEquals(array('dnsbl.sorbs.net'), $this->rbl->getBlacklists());
-        $this->assertEquals(false, $this->rbl->isListed("mail.nohn.net"));
-        $this->assertEquals(true,  $this->rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertFalse($this->rbl->isListed("mail.nohn.net"));
+        $this->assertTrue( $this->rbl->isListed("p50927464.dip.t-dialin.net"));
     }
 
     public function testGetDetails() {
         $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertEquals(true,  $this->rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertTrue( $this->rbl->isListed("p50927464.dip.t-dialin.net"));
         $this->assertEquals(array("dnsbl" => "dnsbl.sorbs.net", "record" => "127.0.0.10"), $this->rbl->getDetails("p50927464.dip.t-dialin.net"));
-        $this->assertEquals(false, $this->rbl->getDetails("mail.nohn.net"));
-        $this->assertEquals(false, $this->rbl->getDetails("somehost.we.never.queried"));
+        $this->assertFalse($this->rbl->getDetails("mail.nohn.net"));
+        $this->assertFalse($this->rbl->getDetails("somehost.we.never.queried"));
     }
 
     public function testGetListingBl() {
         $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertEquals(true,  $this->rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertTrue( $this->rbl->isListed("p50927464.dip.t-dialin.net"));
         $this->assertEquals("dnsbl.sorbs.net",  $this->rbl->getListingBl("p50927464.dip.t-dialin.net"));
-        $this->assertEquals(false,  $this->rbl->getListingBl("www.google.de"));
+        $this->assertFalse($this->rbl->getListingBl("www.google.de"));
     }
 
     public function testGetListingRecord() {
         $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertEquals(true,  $this->rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertTrue( $this->rbl->isListed("p50927464.dip.t-dialin.net"));
         $this->assertEquals("127.0.0.10",  $this->rbl->getListingRecord("p50927464.dip.t-dialin.net"));
-        $this->assertEquals(false,  $this->rbl->getListingRecord("www.google.de"));
+        $this->assertFalse($this->rbl->getListingRecord("www.google.de"));
     }
 
     public function testMultipleBlacklists() {
