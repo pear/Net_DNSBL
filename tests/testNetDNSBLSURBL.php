@@ -3,7 +3,7 @@
 // +------------------------------------------------------------------------+
 // | PEAR :: Net_RBL                                                        |
 // +------------------------------------------------------------------------+
-// | Copyright (c) 2004 Sebastian Nohn <sebastian@nohn.net>                 |
+// | Copyright (c) 2004-2006 Sebastian Nohn <sebastian@nohn.net>            |
 // +------------------------------------------------------------------------+
 // | This source file is subject to version 3.00 of the PHP License,        | 
 // | that is available at http://www.php.net/license/3_0.txt.               | 
@@ -27,6 +27,7 @@ class testNetDNSBLSURBL extends PHPUnit_Framework_TestCase {
     
     public function testSpamUrlsAlwaysGetReportedAsSpam() {
         $this->assertTrue($this->surbl->isListed("http://surbl-org-permanent-test-point.com/justatest"));
+        $this->assertEquals(array(0 => 'multi.surbl.org permanent test point'), $this->surbl->getTxt('http://surbl-org-permanent-test-point.com/justatest'));
         $this->assertTrue($this->surbl->isListed("http://wasdavor.surbl-org-permanent-test-point.com/justatest"));
         $this->assertTrue($this->surbl->isListed("http://127.0.0.2/"));
         $this->assertTrue($this->surbl->isListed("http://127.0.0.2/justatest"));

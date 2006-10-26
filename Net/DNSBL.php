@@ -32,6 +32,7 @@
  */
 
 require_once 'Net/CheckIP.php';
+require_once 'Net/DNS.php';
 
 class Net_DNSBL {
 
@@ -131,6 +132,21 @@ class Net_DNSBL {
         }
     } // function
 
+    /**
+     * Returns TXT-Records, when a host is listed.
+     *
+     * @param  string Host to check
+     * @access public
+     * @return array TXT-Records for this host
+     */
+    function getTxt($host)
+    {
+        if (isset($this->results[$host]['txt'])) {
+            return $this->results[$host]['txt'];
+        } else {
+            return false;
+        }
+    } // function
 
     /** 
      * Checks if the supplied Host is listed in one or more of the
@@ -142,16 +158,19 @@ class Net_DNSBL {
      */
     function isListed($host)
     {
-        
         $isListed = false;
-        
+        $resolver = new Net_DNS_Resolver;
+
         foreach ($this->blacklists as $blacklist) {
-            $result = gethostbyname($this->getHostForLookup($host, $blacklist));
-            if ($result != $this->getHostForLookup($host, $blacklist)) { 
+            $response = $resolver->query($this->getHostForLookup($host, $blacklist));
+            if ($response) {
                 $isListed = true;
                 $this->results[$host]['dnsbl']  = $blacklist;
-                $this->results[$host]['record'] = $result;
-                // $results[$host]['txt']    = 'FIXXME';
+                $this->results[$host]['record'] = $response->answer[0]->address;
+                $response_txt = $resolver->query($this->getHostForLookup($host, $blacklist), 'TXT');
+                foreach ($response_txt->answer as $txt) {
+                    $this->results[$host]['txt'][] = $txt->text[0];
+                }
                 //if the Host was listed we don't need to check other RBLs,
                 break;
                 
@@ -174,7 +193,9 @@ class Net_DNSBL {
     {
         // Currently only works for v4 addresses.
         if (!Net_CheckIP::check_ip($host)) {
-            $ip = gethostbyname($host);
+            $resolver = new Net_DNS_Resolver;
+            $response = $resolver->query($host);
+            $ip = $response->answer[0]->address;
         } else {
             $ip = $host;
         }
