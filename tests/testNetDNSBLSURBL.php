@@ -53,5 +53,12 @@ class testNetDNSBLSURBL extends PHPUnit_Framework_TestCase {
         $this->assertFalse($this->surbl->isListed("http://www.google.com"));
         $this->assertFalse($this->surbl->isListed("http://www.google.co.uk/search?hl=en&q=test&btnG=Google+Search&meta="));
     }
+
+    public function testInvalidArguments() {
+        $this->assertFalse($this->surbl->isListed("hurgahurga"));
+        $this->assertFalse($this->surbl->isListed(null));
+        $this->assertFalse($this->surbl->isListed(false));
+        $this->assertFalse($this->surbl->isListed(true));
+    }
 }
 ?>

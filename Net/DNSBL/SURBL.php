@@ -29,7 +29,7 @@
  * @author  Sebastian Nohn <sebastian@nohn.net>
  * @package Net_DNSBL
  * @license http://www.php.net/license/3_0.txt
- * @version 0.5.4
+ * @version 1.2.0
  */
 require_once 'Cache/Lite.php';
 require_once 'HTTP/Request.php';
@@ -139,13 +139,13 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
                 array_shift($host_elements);
             } // while
             $host_3_elements = implode('.', $host_elements);
-
+            
             $host_elements = explode('.', $host);
             while (count($host_elements) > 2) {
                 array_shift($host_elements);
             } // while
             $host_2_elements = implode('.', $host_elements);
-
+            
             // (3b) IS_FQDN Check if is in "CC-2-level-TLD"
             if ($this->isDoubleCcTld($host_2_elements)) {
                 // (3b1) IS_IN_2LEVEL: we want the last three names
@@ -159,6 +159,6 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
         $host      .= '.'.$blacklist;
         return $host;
     } // function
-
+    
 } // class
 ?>
