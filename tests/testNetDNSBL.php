@@ -1,4 +1,20 @@
 <?php
+//
+// +------------------------------------------------------------------------+
+// | PEAR :: Net_DNSBL                                                      |
+// +------------------------------------------------------------------------+
+// | Copyright (c) 2004-2006 Sebastian Nohn <sebastian@nohn.net>            |
+// +------------------------------------------------------------------------+
+// | This source file is subject to version 3.00 of the PHP License,        |
+// | that is available at http://www.php.net/license/3_0.txt.               |
+// | If you did not receive a copy of the PHP license and are unable to     |
+// | obtain it through the world-wide-web, please send a note to            |
+// | license@php.net so we can mail you a copy immediately.                 |
+// +------------------------------------------------------------------------+
+//
+// $Id$
+//
+
 require_once "Net/DNSBL.php";
 require_once "PHPUnit/Framework/TestCase.php";
 
@@ -38,7 +54,13 @@ class testNetDNSBL extends PHPUnit_Framework_TestCase {
     public function testGetDetails() {
         $this->rbl->setBlacklists(array('dnsbl.sorbs.net'));
         $this->assertTrue( $this->rbl->isListed("p50927464.dip.t-dialin.net"));
-        $this->assertEquals(array("dnsbl" => "dnsbl.sorbs.net", "record" => "127.0.0.10", "txt" => array(0 => "Dynamic IP Addresses See: http://www.sorbs.net/lookup.shtml?80.146.116.100")), $this->rbl->getDetails("p50927464.dip.t-dialin.net"));
+        $this->assertEquals(array(
+                                  "dnsbl" => "dnsbl.sorbs.net", 
+                                  "record" => "127.0.0.10", 
+                                  "txt" => array(
+                                                 0 => "Dynamic IP Addresses See: http://www.sorbs.net/lookup.shtml?80.146.116.100"
+                                                 )
+                                  ), $this->rbl->getDetails("p50927464.dip.t-dialin.net"));
         $this->assertFalse($this->rbl->getDetails("mail.nohn.net"));
         $this->assertFalse($this->rbl->getDetails("somehost.we.never.queried"));
     }
@@ -73,6 +95,13 @@ class testNetDNSBL extends PHPUnit_Framework_TestCase {
                                         ));
         $this->assertFalse($this->rbl->isListed('212.112.226.205'));
         $this->assertFalse($this->rbl->getListingBl('212.112.226.205'));
+    }
+
+    public function testCacheNoCache() {
+        for ($i=1; $i<=10; $i++) {
+            $this->assertFalse($this->rbl->isListed($i.'.nohn.net'));
+            $this->assertFalse($this->rbl->isListed(md5(rand()).'.nohn.net'));
+        }
     }
 }
 ?>
