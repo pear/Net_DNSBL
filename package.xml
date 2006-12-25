@@ -22,7 +22,7 @@
     <api>1.2.0</api>
   </version>
   <stability>
-    <release>1.2.1</release>
+    <release>stable</release>
     <api>stable</api>
   </stability>
   <license uri="http://www.php.net/license">PHP License</license>
