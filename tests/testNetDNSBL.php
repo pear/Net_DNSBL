@@ -3,7 +3,7 @@
 // +------------------------------------------------------------------------+
 // | PEAR :: Net_DNSBL                                                      |
 // +------------------------------------------------------------------------+
-// | Copyright (c) 2004-2006 Sebastian Nohn <sebastian@nohn.net>            |
+// | Copyright (c) 2004-2007 Sebastian Nohn <sebastian@nohn.net>            |
 // +------------------------------------------------------------------------+
 // | This source file is subject to version 3.00 of the PHP License,        |
 // | that is available at http://www.php.net/license/3_0.txt.               |
