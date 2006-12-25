@@ -1,0 +1,73 @@
+#!/opt/php/bin/php
+<?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * PEAR::Net_DNSBL
+ *
+ * This script checks wether a host is listed in a list of supplied
+ * RBLs for use with the nagios network monitor (www.nagios.org). For
+ * more see http://www.nohn.org/blog/archives/12-guid.html
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.01 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_01.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
+ * Net_RBL looks up an supplied host if it's listed in 1-n supplied
+ * Blacklists
+ *
+ * @category   Net
+ * @package    DNSBL
+ * @author     Sebastian Nohn <sebastian@nohn.net>
+ * @copyright  2004-2007 Sebastian Nohn <sebastian@nohn.net>
+ * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version    CVS: $Id$
+ * @link       http://pear.php.net/package/Net_DNSBL
+ * @see        Net_DNS
+ * @since      File available since Release 1.2.1
+ */
+
+define('SERVICE_STATUS', 'Service Status:');
+
+require_once 'Console/Getopt.php';
+require_once 'Net/DNSBL.php';
+
+$dnsbl = new Net_DNSBL();
+
+$shortoptions = 'H:V::r:';
+$longoptions = array('hostname=', 'version==', 'rbls=');
+
+$con = new Console_Getopt;
+$args = $con->readPHPArgv();
+array_shift($args);
+$options = $con->getopt2($args, $shortoptions, $longoptions);
+
+foreach($options[0] as $option) {
+    if ($option[0] == 'H' || $option[0] == '--hostname') {
+        $hostname = $option[1];
+    }
+    if ($option[0] == 'r' || $option[0] == '--rbls') {
+        $rbls_temp = $option[1];
+    }
+}
+
+if (!isset($hostname) || !isset($rbls_temp)) {
+    echo SERVICE_STATUS.' Unknown'."\n";
+    exit(3);
+} else {
+    $rbls = explode(',', $rbls_temp);
+    $dnsbl->setBlacklists($rbls);
+    if ($dnsbl->isListed($hostname)) {
+        echo SERVICE_STATUS.' Critical - Listed in '.$dnsbl->getListingBl($hostname).' -- '.implode(', ', $dnsbl->getTxt($hostname))."\n";
+        exit(2);
+    } else {
+        echo SERVICE_STATUS.' OK - Not Listed in supplied DNSBLs'."\n";
+        exit(0);
+    }
+}
+?>
