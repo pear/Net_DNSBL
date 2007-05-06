@@ -32,15 +32,25 @@
   <contents>
     <dir name="/">
       <dir name="Net">
-        <file name="DNSBL.php" role="php"/>
+        <file name="DNSBL.php" role="php">
+          <replace from="@package_version@" to="version" type="package-info" />
+        </file>
         <dir name="DNSBL">
-          <file name="SURBL.php" role="php"/>
+          <file name="SURBL.php" role="php">
+            <replace from="@package_version@" to="version" type="package-info" />
+          </file>
         </dir>
       </dir>
       <dir name="tests">
-        <file name="AllTests.php" role="test"/>
-        <file name="testNetDNSBL.php" role="test"/>
-        <file name="testNetDNSBLSURBL.php" role="test"/>
+        <file name="AllTests.php" role="test">
+          <replace from="@package_version@" to="version" type="package-info" />
+        </file>
+        <file name="testNetDNSBL.php" role="test">
+          <replace from="@package_version@" to="version" type="package-info" />
+        </file>
+        <file name="testNetDNSBLSURBL.php" role="test">
+          <replace from="@package_version@" to="version" type="package-info" />
+        </file>
       </dir>
     </dir>
   </contents>

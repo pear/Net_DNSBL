@@ -41,7 +41,7 @@ require_once "PHPUnit/Framework/TestCase.php";
  * @package  Net_DNSBL
  * @author   Sebastian Nohn <sebastian@nohn.net>
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version  Release: 1.2.2
+ * @version  Release: @package_version@
  * @link     http://pear.php.net/package/net_dnsbl Package Home
  */
 
