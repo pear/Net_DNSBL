@@ -198,6 +198,33 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase {
     }
 
     /**
+     * Test getBlacklists() with multiple blacklists (listed test host)
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testGetListingBls()
+    {
+        $this->rbl->setBlackLists(array(
+                                        'sbl-xbl.spamhaus.org',
+                                        'bl.spamcop.net'
+                                        ));
+        $this->assertTrue($this->rbl->isListed('127.0.0.2', true));
+        $this->assertEquals(array(
+                                  'sbl-xbl.spamhaus.org',
+                                  'bl.spamcop.net'
+                                  ), $this->rbl->getListingBls('127.0.0.2'));
+        $this->assertFalse($this->rbl->isListed('smtp1.google.com', true));
+        $this->assertEquals(false, $this->rbl->getListingBls('smtp1.google.com'));
+        $result = $this->rbl->getDetails('127.0.0.2');
+        $this->assertContains('127.0.0.2', $result['sbl-xbl.spamhaus.org']['record']);
+        $this->assertContains('http://www.spamhaus.org/SBL/sbl.lasso?query=SBL233', $result['sbl-xbl.spamhaus.org']['txt']);
+        $this->assertContains('http://www.spamhaus.org/query/bl?ip=127.0.0.2', $result['sbl-xbl.spamhaus.org']['txt']);
+        $this->assertContains('127.0.0.2', $result['bl.spamcop.net']['record']);
+        $this->assertContains('Blocked - see http://www.spamcop.net/bl.shtml?127.0.0.2', $result['bl.spamcop.net']['txt']);
+        $this->assertFalse($this->rbl->getDetails('smtp1.google.com'));
+    }
+
+    /**
      * Test without caching.
      *
      * @return boolean true on success, false on failure

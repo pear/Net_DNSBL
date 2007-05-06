@@ -111,8 +111,12 @@ class Net_DNSBL {
      */
     function getDetails($host)
     {
-        if (isset($this->results[$host]['dnsbl'])) {
-            return $this->results[$host];
+        if (isset($this->results[$host])) {
+            if (count($this->results[$host])>1) {
+                return $this->results[$host];
+            } else {
+                return $this->results[$host][0];
+            }
         } else {
             return false;
         }
@@ -130,6 +134,29 @@ class Net_DNSBL {
     {
         if (isset($this->results[$host]['dnsbl'])) {
             return $this->results[$host]['dnsbl'];
+        } else {
+            return false;
+        }
+    } // function
+
+    /**
+     * Returns Blacklists, host is listed in. isListed() must have
+     * been called with checkall = true
+     *
+     * @param string $host Host to check
+     *
+     * @access public
+     * @return array blacklists, a host is listed in or false
+     */
+    function getListingBls($host)
+    {
+        if (is_array($this->results[$host])) {
+            $result = array_keys($this->results[$host]);
+            if ($result == null) {
+                return false;
+            } else {
+                return $result;
+            }
         } else {
             return false;
         }
@@ -176,7 +203,7 @@ class Net_DNSBL {
      * @access public
      * @return boolean true if the checked host is listed in a blacklist.
      */
-    function isListed($host)
+    function isListed($host, $checkall = false)
     {
         $isListed = false;
         $resolver = new Net_DNS_Resolver;
@@ -185,18 +212,31 @@ class Net_DNSBL {
             $response = $resolver->query($this->getHostForLookup($host, $blacklist));
             if ($response) {
                 $isListed = true;
-                $this->results[$host]['dnsbl']  = $blacklist;
-                $this->results[$host]['record'] = $response->answer[0]->address;
-                $response_txt = 
-                    $resolver->query($this->getHostForLookup($host, 
-                                                             $blacklist), 
-                                     'TXT');
-                foreach ($response_txt->answer as $txt) {
-                    $this->results[$host]['txt'][] = $txt->text[0];
+                if ($checkall) {
+                    $this->results[$host][$blacklist] = array();
+                    foreach ($response->answer as $answer) {
+                        $this->results[$host][$blacklist]['record'][] = $answer->address;
+                    }
+                    $response_txt = 
+                        $resolver->query($this->getHostForLookup($host, 
+                                                                 $blacklist), 
+                                         'TXT');
+                    foreach ($response_txt->answer as $txt) {
+                        $this->results[$host][$blacklist]['txt'][] = $txt->text[0];
+                    }
+                } else {
+                    $this->results[$host]['dnsbl']  = $blacklist;
+                    $this->results[$host]['record'] = $response->answer[0]->address;
+                    $response_txt = 
+                        $resolver->query($this->getHostForLookup($host, 
+                                                                 $blacklist), 
+                                         'TXT');
+                    foreach ($response_txt->answer as $txt) {
+                        $this->results[$host]['txt'][] = $txt->text[0];
+                    }
+                    // if the Host was listed we don't need to check other RBLs,
+                    break;
                 }
-                //if the Host was listed we don't need to check other RBLs,
-                break;
-                
             } // if
         } // foreach
         
