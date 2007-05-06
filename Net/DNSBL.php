@@ -199,7 +199,11 @@ class Net_DNSBL {
      * Checks if the supplied Host is listed in one or more of the
      * RBLs.
      *
-     * @param string $host Host to check for being listed.
+     * @param string  $host     Host to check for being listed.
+     * @param boolean $checkall Iterate through all blacklists and
+     *                          return all A records or stop after 
+     *                          the first hit?
+     *
      * @access public
      * @return boolean true if the checked host is listed in a blacklist.
      */
