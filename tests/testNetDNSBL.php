@@ -65,8 +65,8 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase {
     public function testHostsAlwaysAreListed()
     {
         $this->assertTrue($this->rbl->isListed("127.0.0.2"));
-        $this->assertTrue(in_array("http://www.spamhaus.org/query/bl?ip=127.0.0.2", $this->rbl->getTxt('127.0.0.2')));
-        $this->assertTrue(in_array("http://www.spamhaus.org/SBL/sbl.lasso?query=SBL233", $this->rbl->getTxt('127.0.0.2')));
+        $this->assertContains("http://www.spamhaus.org/query/bl?ip=127.0.0.2", $this->rbl->getTxt('127.0.0.2'));
+        $this->assertContains("http://www.spamhaus.org/SBL/sbl.lasso?query=SBL233", $this->rbl->getTxt('127.0.0.2'));
     }
 
     /**
