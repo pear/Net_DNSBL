@@ -5,6 +5,9 @@
          command="up -A -d" />
   </target>
   <target name="test">
+    <exec dir="${basedir}" executable="phpcs" failonerror="true">
+        <arg line="--standard=PEAR ." />
+    </exec>
     <exec dir="${basedir}" executable="phpunit" failonerror="true">
         <arg line="-d include_path=.:${basedir}:/opt/php/lib/php --log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml --report ${basedir}/build/report AllTests tests/AllTests.php" />
     </exec>

@@ -18,28 +18,53 @@
  * Net_DNSBL looks up an supplied host if it's listed in 1-n supplied
  * Blacklists
  *
- * @category   Net
- * @package    DNSBL
- * @author     Sebastian Nohn <sebastian@nohn.net>
- * @copyright  2004-2007 Sebastian Nohn <sebastian@nohn.net>
- * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Net_DNSBL
- * @see        Net_DNS
- * @since      File available since Release 1.0.0
+ * @category  Net
+ * @package   Net_DNSBL
+ * @author    Sebastian Nohn <sebastian@nohn.net>
+ * @copyright 2004-2007 Sebastian Nohn <sebastian@nohn.net>
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Net_DNSBL Package Home
+ * @see       Net_DNS
+ * @since     File available since Release 1.0.0
  */
 
 require_once "Net/DNSBL/SURBL.php";
 require_once "PHPUnit/Framework/TestCase.php";
 
-class testNetDNSBLSURBL extends PHPUnit_Framework_TestCase {
+/**
+ * TestNetDNSBLSURBL
+ *
+ * This class tests all public Net_DNSBL_SURBL methods
+ *
+ * @category Net
+ * @package  Net_DNSBL
+ * @author   Sebastian Nohn <sebastian@nohn.net>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version  Release: 1.2.2
+ * @link     http://pear.php.net/package/net_dnsbl Package Home
+ */
+
+class TestNetDNSBLSURBL extends PHPUnit_Framework_TestCase {
     private $surbl;
-    
-    protected function setUp() {
+
+    /**
+     * Set up Testcase for Net_DNSBL_SURBL
+     *
+     * @return boolean true on success, false on failure
+     */
+    protected function setUp()
+    {
         $this->surbl = new Net_DNSBL_SURBL;
     }
     
-    public function testSpamUrlsAlwaysGetReportedAsSpam() {
+    /**
+     * Tests if a test spam URL is always correctly identified as such. 
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testSpamUrlsAlwaysGetReportedAsSpam()
+    {
         $this->assertTrue($this->surbl->isListed("http://surbl-org-permanent-test-point.com/justatest"));
         $this->assertEquals(array(0 => 'multi.surbl.org permanent test point'), $this->surbl->getTxt('http://surbl-org-permanent-test-point.com/justatest'));
         $this->assertTrue($this->surbl->isListed("http://wasdavor.surbl-org-permanent-test-point.com/justatest"));
@@ -47,7 +72,13 @@ class testNetDNSBLSURBL extends PHPUnit_Framework_TestCase {
         $this->assertTrue($this->surbl->isListed("http://127.0.0.2/justatest"));
     }
 
-    public function testNoSpamUrlsNeverGetReportedAsSpam() {
+    /**
+     * Tests if an URL that should not be spam is always correctly identified as such. 
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testNoSpamUrlsNeverGetReportedAsSpam()
+    {
         $this->assertFalse($this->surbl->isListed("http://www.nohn.net"));
         $this->assertFalse($this->surbl->isListed("http://www.php.net/"));
         $this->assertFalse($this->surbl->isListed("http://www.heise.de/24234234?url=lala"));
@@ -56,7 +87,13 @@ class testNetDNSBLSURBL extends PHPUnit_Framework_TestCase {
         $this->assertFalse($this->surbl->isListed("http://www.google.co.uk/search?hl=en&q=test&btnG=Google+Search&meta="));
     }
 
-    public function testMixedSpamAndNospamUrlsWorkAsExpected() {
+    /**
+     * Tests if a set of spam and no-spam URLs is always correctly identified as such. 
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testMixedSpamAndNospamUrlsWorkAsExpected()
+    {
         $this->assertFalse($this->surbl->isListed("http://www.nohn.net"));
         $this->assertTrue($this->surbl->isListed("http://surbl-org-permanent-test-point.com"));
         $this->assertTrue($this->surbl->isListed("http://wasdavor.surbl-org-permanent-test-point.com/justatest"));
@@ -68,7 +105,13 @@ class testNetDNSBLSURBL extends PHPUnit_Framework_TestCase {
         $this->assertFalse($this->surbl->isListed("http://www.google.co.uk/search?hl=en&q=test&btnG=Google+Search&meta="));
     }
 
-    public function testInvalidArguments() {
+    /**
+     * Tests if invalid arguments always return false.
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testInvalidArguments()
+    {
         $this->assertFalse($this->surbl->isListed("hurgahurga"));
         $this->assertFalse($this->surbl->isListed(null));
         $this->assertFalse($this->surbl->isListed(false));
