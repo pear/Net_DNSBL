@@ -50,7 +50,8 @@ require_once 'testNetDNSBLSURBL.php';
  * @link     http://pear.php.net/package/net_dnsbl Package Home
  */
 
-class AllTests {
+class AllTests
+{
     
     /**
      * Execute tests

@@ -50,7 +50,8 @@ require_once 'Net/DNS.php';
  * @link     http://pear.php.net/package/net_dnsbl Package Home
  */
 
-class Net_DNSBL {
+class Net_DNSBL
+{
 
     /**     
      * Array of blacklists.
@@ -183,6 +184,7 @@ class Net_DNSBL {
      * Returns TXT-Records, when a host is listed.
      *
      * @param string $host Host to check
+     *
      * @access public
      * @return array TXT-Records for this host
      */
@@ -253,6 +255,7 @@ class Net_DNSBL {
      *
      * @param string $host      Host OR IP to use for building the lookup.
      * @param string $blacklist Blacklist to use for building the lookup.
+     *
      * @access protected
      * @return string Ready to use host to lookup
      */    

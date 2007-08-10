@@ -44,7 +44,8 @@ require_once "PHPUnit/Framework/TestCase.php";
  * @version  Release: @package_version@
  * @link     http://pear.php.net/package/net_dnsbl Package Home
  */
-class TestNetDNSBL extends PHPUnit_Framework_TestCase {
+class TestNetDNSBL extends PHPUnit_Framework_TestCase
+{
     private $rbl;
     
     /**

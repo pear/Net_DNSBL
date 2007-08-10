@@ -51,7 +51,8 @@ require_once 'Net/DNSBL.php';
  * @link     http://pear.php.net/package/net_dnsbl Package Home
  */
 
-class Net_DNSBL_SURBL extends Net_DNSBL {
+class Net_DNSBL_SURBL extends Net_DNSBL
+{
 
     /**     
      * Array of blacklists.
