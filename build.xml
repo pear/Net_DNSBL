@@ -9,7 +9,7 @@
         <arg line="--standard=PEAR -n ." />
     </exec>
     <exec dir="${basedir}" executable="phpunit" failonerror="true">
-        <arg line="-d include_path=.:${basedir}:/opt/php/lib/php --log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml --report ${basedir}/build/report AllTests tests/AllTests.php --log-metrics ${basedir}/build/logs/metrics.xml --log-pmd ${basedir}/build/logs/pmd.xml"/>
+        <arg line="-d include_path=.:${basedir}:/opt/php/lib/php --log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml --report ${basedir}/build/report --log-metrics ${basedir}/build/logs/metrics.xml --log-pmd ${basedir}/build/logs/pmd.xml AllTests tests/AllTests.php"/>
     </exec>
   </target>
   <target name="build" depends="update, test">
