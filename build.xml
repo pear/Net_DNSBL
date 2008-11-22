@@ -8,7 +8,8 @@
     <exec dir="${basedir}" executable="phpcs" failonerror="true" output="${basedir}/build/logs/checkstyle.xml">
         <arg line="--report=checkstyle 
                    --standard=PEAR 
-                   --ignore=build/ ." />
+                   --ignore=build/ 
+                   -n ." />
     </exec>
     <exec dir="${basedir}" executable="phpunit" failonerror="true">
         <arg line="-d include_path=.:${basedir}:/opt/php/lib/php 
