@@ -101,7 +101,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL
                          'lifeTime' => '2592000',
                          'automaticSerialization' => true
                          );
-        $id = md5($this->doubleCcTldFile);
+        $id      = md5($this->doubleCcTldFile);
 
         $cache = new Cache_Lite($options);
         if ($data = $cache->get($id)) {

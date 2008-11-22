@@ -70,7 +70,7 @@ class Net_DNSBL
      * @var    array
      * @access protected
      */
-    var $results    = array();
+    var $results = array();
 
     /**
      * Set the blacklist to a desired blacklist.
@@ -221,7 +221,8 @@ class Net_DNSBL
                 if ($checkall) {
                     $this->results[$host][$blacklist] = array();
                     foreach ($response->answer as $answer) {
-                        $this->results[$host][$blacklist]['record'][] = $answer->address;
+                        $this->results[$host][$blacklist]['record'][] = 
+                            $answer->address;
                     }
                     $response_txt = 
                         $resolver->query($this->getHostForLookup($host, 
@@ -233,7 +234,7 @@ class Net_DNSBL
                 } else {
                     $this->results[$host]['dnsbl']  = $blacklist;
                     $this->results[$host]['record'] = $response->answer[0]->address;
-                    $response_txt = 
+                    $response_txt                   = 
                         $resolver->query($this->getHostForLookup($host, 
                                                                  $blacklist), 
                                          'TXT');

@@ -1,4 +1,3 @@
-
 <project name="PEAR_Net_DNSBL" default="build" basedir=".">
   <target name="update">
     <cvs cvsRoot=":pserver:nohn@cvs.php.net:/repository"
@@ -7,7 +6,9 @@
 
   <target name="test">
     <exec dir="${basedir}" executable="phpcs" failonerror="true" output="${basedir}/build/logs/checkstyle.xml">
-        <arg line="--report=checkstyle --standard=PEAR -n ." />
+        <arg line="--report=checkstyle 
+                   --standard=PEAR 
+                   --ignore=build/ ." />
     </exec>
     <exec dir="${basedir}" executable="phpunit" failonerror="true">
         <arg line="-d include_path=.:${basedir}:/opt/php/lib/php 
