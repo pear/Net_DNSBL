@@ -4,13 +4,16 @@
          command="up -A -d" />
   </target>
 
-  <target name="test">
+  <target name="phpcodesniffer">
     <exec dir="${basedir}" executable="phpcs" failonerror="true" output="${basedir}/build/logs/checkstyle.xml">
         <arg line="--report=checkstyle 
                    --standard=PEAR 
                    --ignore=build/ 
-                   -n ." />
+                   ." />
     </exec>
+  </target>
+
+  <target name="phpunit">
     <exec dir="${basedir}" executable="phpunit" failonerror="true">
         <arg line="-d include_path=.:${basedir}:/opt/php/lib/php 
                    --log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml 
@@ -20,6 +23,9 @@
                    --coverage-xml ${basedir}/build/logs/phpunit.coverage.xml 
                    AllTests tests/AllTests.php"/>
     </exec>
+  </target>
+
+  <target name="test" depends="phpcodesniffer, phpunit">
   </target>
 
   <target name="build" depends="update, test">
