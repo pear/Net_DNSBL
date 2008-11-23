@@ -1,5 +1,10 @@
 <project name="PEAR_Net_DNSBL" default="build" basedir=".">
-  <target name="update">
+  <target name="clean">
+    <delete dir="${basedir}/build/" />
+    <mkdir dir="${basedir}/build/logs/" />
+  </target>
+
+  <target name="update" depends="clean">
     <cvs command="up -A -d" />
   </target>
 
