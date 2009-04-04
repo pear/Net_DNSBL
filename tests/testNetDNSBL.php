@@ -21,7 +21,7 @@
  * @category  Net
  * @package   Net_DNSBL
  * @author    Sebastian Nohn <sebastian@nohn.net>
- * @copyright 2004-2008 Sebastian Nohn <sebastian@nohn.net>
+ * @copyright 2004-2009 Sebastian Nohn <sebastian@nohn.net>
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Net_DNSBL Package Home
@@ -251,5 +251,23 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
             $this->assertFalse($this->_rbl->isListed(md5(rand()).'.nohn.net'));
         }
     }
+
+    /**
+     * Test Bokus
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testBogusInput()
+    {
+        $this->_rbl->setBlacklists(array('rbl.efnet.org'));
+        $this->assertFalse($this->_rbl->isListed(null));
+        $this->assertFalse($this->_rbl->getTxt(null));
+        $this->assertFalse($this->_rbl->isListed(false));
+        $this->assertFalse($this->_rbl->getTxt(false));
+        $this->assertFalse($this->_rbl->isListed(true));
+        $this->assertFalse($this->_rbl->getTxt(true));
+
+    }
+
 }
 ?>
