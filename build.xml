@@ -6,7 +6,7 @@
           depends="prepare, phpcs, phpmd, phpcpd, pdepend">
   </target>
   <target name="phpcs">
-    <exec dir="${basedir}" executable="phpcs" failonerror="true" output="${basedir}/build/logs/checkstyle.xml">
+    <exec dir="${basedir}" executable="phpcs" failonerror="false" output="${basedir}/build/logs/checkstyle.xml">
         <arg line="--report=checkstyle 
                    --standard=PEAR 
                    --ignore=build/ 
