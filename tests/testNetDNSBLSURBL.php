@@ -66,13 +66,25 @@ class TestNetDNSBLSURBL extends PHPUnit_Framework_TestCase
      */
     public function testSpamUrlsAlwaysGetReportedAsSpam()
     {
-        $this->assertTrue($this->_surbl->isListed('http://surbl-org-permanent'.
-            '-test-point.com/justatest'));
-        $this->assertEquals(array(0 => 'multi.surbl.org permanent test point'), 
-            $this->_surbl->getTxt('http://surbl-org-permanent-test-point.com/'.
-            'justatest'));
-        $this->assertTrue($this->_surbl->isListed('http://wasdavor.surbl-org-'.
-            'permanent-test-point.com/justatest'));
+        $this->assertTrue(
+            $this->_surbl->isListed(
+                'http://surbl-org-permanent'.
+                '-test-point.com/justatest'
+            )
+        );
+        $this->assertEquals(
+            array(0 => 'multi.surbl.org permanent test point'), 
+            $this->_surbl->getTxt(
+                'http://surbl-org-permanent-test-point.com/'.
+                'justatest'
+            )
+        );
+        $this->assertTrue(
+            $this->_surbl->isListed(
+                'http://wasdavor.surbl-org-'.
+                'permanent-test-point.com/justatest'
+            )
+        );
         $this->assertTrue($this->_surbl->isListed('http://127.0.0.2/'));
         $this->assertTrue($this->_surbl->isListed('http://127.0.0.2/justatest'));
     }
@@ -87,12 +99,20 @@ class TestNetDNSBLSURBL extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_surbl->isListed('http://www.nohn.net'));
         $this->assertFalse($this->_surbl->isListed('http://www.php.net/'));
-        $this->assertFalse($this->_surbl->isListed('http://www.heise.de/'.
-            '24234234?url=lala'));
+        $this->assertFalse(
+            $this->_surbl->isListed(
+                'http://www.heise.de/'.
+                '24234234?url=lala'
+            )
+        );
         $this->assertFalse($this->_surbl->isListed('http://www.nohn.net/blog/'));
         $this->assertFalse($this->_surbl->isListed('http://213.147.6.150/atest'));
-        $this->assertFalse($this->_surbl->isListed('http://www.google.co.uk/search'.
-            '?hl=en&q=test&btnG=Google+Search&meta='));
+        $this->assertFalse(
+            $this->_surbl->isListed(
+                'http://www.google.co.uk/search'.
+                '?hl=en&q=test&btnG=Google+Search&meta='
+            )
+        );
     }
 
     /**
@@ -104,16 +124,28 @@ class TestNetDNSBLSURBL extends PHPUnit_Framework_TestCase
     public function testMixedSpamAndNospamUrlsWorkAsExpected()
     {
         $this->assertFalse($this->_surbl->isListed('http://www.nohn.net'));
-        $this->assertTrue($this->_surbl->isListed('http://surbl-org-permanent'.
-            '-test-point.com'));
-        $this->assertTrue($this->_surbl->isListed('http://surbl-org-permanent'.
-            '-test-point.com/justatest'));
+        $this->assertTrue(
+            $this->_surbl->isListed(
+                'http://surbl-org-permanent'.
+                '-test-point.com'
+            )
+        );
+        $this->assertTrue(
+            $this->_surbl->isListed(
+                'http://surbl-org-permanent'.
+                '-test-point.com/justatest'
+            )
+        );
         $this->assertTrue($this->_surbl->isListed('http://127.0.0.2/justatest'));
         $this->assertFalse($this->_surbl->isListed('http://213.147.6.150/atest'));
         $this->assertFalse($this->_surbl->isListed('http://www.php.net'));
         $this->assertFalse($this->_surbl->isListed('http://www.google.com'));
-        $this->assertFalse($this->_surbl->isListed('http://www.google.co.uk/search'.
-            '?hl=en&q=test&btnG=Google+Search&meta='));
+        $this->assertFalse(
+            $this->_surbl->isListed(
+                'http://www.google.co.uk/search'.
+                '?hl=en&q=test&btnG=Google+Search&meta='
+            )
+        );
     }
 
     /**

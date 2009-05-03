@@ -225,23 +225,31 @@ class Net_DNSBL
                 if ($checkall) {
                     $this->results[$host][$blacklist] = array();
                     foreach ($response->answer as $answer) {
-                        $this->results[$host][$blacklist]['record'][] = 
-                            $answer->address;
+                        $this->results[$host][$blacklist]['record'][] 
+                            = $answer->address;
                     }
-                    $response_txt = 
-                        $resolver->query($this->getHostForLookup($host, 
-                                                                 $blacklist), 
-                                         'TXT');
+                    $response_txt 
+                        = $resolver->query(
+                            $this->getHostForLookup(
+                                $host, 
+                                $blacklist
+                            ), 
+                            'TXT'
+                        );
                     foreach ($response_txt->answer as $txt) {
                         $this->results[$host][$blacklist]['txt'][] = $txt->text[0];
                     }
                 } else {
                     $this->results[$host]['dnsbl']  = $blacklist;
                     $this->results[$host]['record'] = $response->answer[0]->address;
-                    $response_txt                   = 
-                        $resolver->query($this->getHostForLookup($host, 
-                                                                 $blacklist), 
-                                         'TXT');
+                    $response_txt
+                        = $resolver->query(
+                            $this->getHostForLookup(
+                                $host, 
+                                $blacklist
+                            ), 
+                            'TXT'
+                        );
                     if ((isset($response_txt)) && ($response_txt != false)) {
                         foreach ($response_txt->answer as $txt) {
                             $this->results[$host]['txt'][] = $txt->text[0];

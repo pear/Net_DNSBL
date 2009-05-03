@@ -1,19 +1,43 @@
 <project name="PEAR_Net_DNSBL" default="build" basedir=".">
-  <target name="clean">
-    <delete dir="${basedir}/build/" />
-    <mkdir dir="${basedir}/build/logs/" />
+  <!-- Testing -->
+  <target name="test" depends="prepare, test_static, test_unit"></target>
+  <!-- Static Testing -->
+  <target name="test_static" 
+          depends="prepare, phpcs, phpmd, phpcpd, pdepend">
   </target>
-
-  <target name="update" depends="clean">
-    <cvs command="up -A -d" />
-  </target>
-
-  <target name="phpcodesniffer">
+  <target name="phpcs">
     <exec dir="${basedir}" executable="phpcs" failonerror="true" output="${basedir}/build/logs/checkstyle.xml">
         <arg line="--report=checkstyle 
                    --standard=PEAR 
                    --ignore=build/ 
                    ." />
+    </exec>
+  </target>
+  <target name="phpmd">
+    <exec dir="${basedir}" executable="phpmd" failonerror="false">
+      <arg line=". xml codesize --reportfile ${basedir}/build/logs/phpmd.xml"/>
+    </exec>
+  </target>
+  <target name="phpcpd">
+    <exec dir="${basedir}" executable="phpcpd" 
+          failonerror="false">
+      <arg line="--log-pmd=${basedir}/build/logs/phpcpd.xml ."/>
+    </exec>
+  </target>
+  <target name="pdepend">
+    <exec dir="${basedir}" executable="pdepend" 
+          failonerror="false">
+      <arg line="--jdepend-xml=${basedir}/build/logs/pdepend.xml ."/>
+    </exec>
+  </target>
+  <!-- Dynamic Testing -->
+  <target name="test_unit">
+    <exec dir="${basedir}" executable="phpunit" failonerror="true">
+        <arg line="-d include_path=.:${basedir}:/opt/php/lib/php:/usr/share/php 
+                   --coverage-clover ${basedir}/build/logs/clover.xml
+                   --log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml 
+                   --stop-on-failure
+                   AllTests tests/AllTests.php"/>
     </exec>
   </target>
 
@@ -23,24 +47,30 @@
     </exec>  
   </target> 
 
-  <target name="phpunit">
-    <exec dir="${basedir}" executable="phpunit" failonerror="true">
-        <arg line="-d include_path=.:${basedir}:/opt/php/lib/php:/usr/share/php 
-                   --coverage-html ${basedir}/build/report 
-                   --coverage-xml ${basedir}/build/logs/phpunit.coverage.xml 
-                   --log-metrics ${basedir}/build/logs/metrics.xml 
-                   --log-pmd ${basedir}/build/logs/pmd.xml
-                   --log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml 
-                   AllTests tests/AllTests.php"/>
-    </exec>
-  </target>
 
-  <target name="test" depends="phpcodesniffer, phpunit">
+  <target name="build" depends="update, prepare, test, deliv">
   </target>
-
-  <target name="build" depends="update, test, phpdoc">
+  <target name="clean">
+    <delete dir="${basedir}/build/" />
+  </target>
+  <target name="prepare" depends="clean">
+    <tstamp>
+      <format property="build.tstamp" pattern="yyyyddmmhhmmss" />
+    </tstamp>
+    <mkdir dir="${basedir}/build/logs"/>
+    <mkdir dir="${basedir}/build/deliv"/>
+  </target>
+  <target name="deliv">
     <exec dir="${basedir}" executable="pear" failonerror="true">
         <arg line="package" />
     </exec>
+    <move todir="build/deliv/">
+      <fileset dir="${basedir}">
+        <include name="*.tgz"/>
+      </fileset>
+    </move>
+  </target>
+  <target name="update" depends="prepare">
+    <cvs command="up -A -d" />
   </target>
 </project>
