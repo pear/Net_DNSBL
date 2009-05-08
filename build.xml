@@ -6,7 +6,7 @@
           depends="prepare, phpcs, phpmd, phpcpd, pdepend">
   </target>
   <target name="phpcs">
-    <exec dir="${basedir}" executable="phpcs" failonerror="false" output="${basedir}/build/logs/checkstyle.xml">
+    <exec dir="${basedir}" executable="phpcs" failonerror="true" output="${basedir}/build/logs/checkstyle.xml">
         <arg line="--report=checkstyle 
                    --standard=PEAR 
                    --ignore=build/ 
@@ -35,7 +35,9 @@
     <exec dir="${basedir}" executable="phpunit" failonerror="true">
         <arg line="-d include_path=.:${basedir}:/opt/php/lib/php:/usr/share/php 
                    --coverage-clover ${basedir}/build/logs/clover.xml
-                   --log-xml ${basedir}/build/logs/phpunit_test_net_dnsbl.xml 
+                   --log-xml         ${basedir}/build/logs/phpunit_test_net_dnsbl.xml 
+                   --coverage-xml    ${basedir}/build/logs/coverage.xml
+                   --coverage-html   ${basedir}/build/deliv/coverage
                    --stop-on-failure
                    AllTests tests/AllTests.php"/>
     </exec>

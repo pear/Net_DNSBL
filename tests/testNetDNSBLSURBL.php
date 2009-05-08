@@ -160,5 +160,20 @@ class TestNetDNSBLSURBL extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_surbl->isListed(false));
         $this->assertFalse($this->_surbl->isListed(true));
     }
+
+    /**
+     * Test encoded URLs are looked up correctly
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testEncodedUrls()
+    {
+        $this->assertTrue(
+            $this->_surbl->isListed(
+                'http://%73urbl-org-permanent'.
+                '-test-point.com/justatest'
+            )
+        );
+    }
 }
 ?>

@@ -147,7 +147,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL
         // (1) Extract the hostname from the given URI
         $host       = '';
         $parsed_uri = parse_url($uri);
-        $host       = $parsed_uri['host'];
+        $host       = urldecode($parsed_uri['host']);
         // (2) Check if the "hostname" is an ip
         if (Net_CheckIP::check_ip($host)) {
             // (3a) IS_IP Reverse the IP (1.2.3.4 -> 4.3.2.1)
