@@ -236,8 +236,11 @@ class Net_DNSBL
                             ), 
                             'TXT'
                         );
-                    foreach ($response_txt->answer as $txt) {
-                        $this->results[$host][$blacklist]['txt'][] = $txt->text[0];
+                    if (isset($response_txt->answer)) {
+                        foreach ($response_txt->answer as $txt) {
+                            $this->results[$host][$blacklist]['txt'][]
+                                = $txt->text[0];
+                        }
                     }
                 } else {
                     $this->results[$host]['dnsbl']  = $blacklist;

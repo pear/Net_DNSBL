@@ -295,5 +295,33 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Test different behaviour on TXT-Records with multiple
+     * RBLs
+     *
+     * @see http://pear.php.net/bugs/bug.php?id=16353
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testDifferentBehaviourOnTxtRecordsWithMultipleRbls()
+    {
+        $this->_rbl->setBlacklists(
+            array(
+                'dnsbl.sorbs.net',
+                'rbl.efnetrbl.org',
+                'dnsbl.dronebl.org',
+                'xbl.spamhaus.org',
+                'tor.dnsbl.sectoor.de',
+                'cbl.abuseat.org',
+                'dnsbl.njabl.org'
+            )
+        );
+        if ($this->_rbl->isListed('127.0.0.2', true)) { 
+            $this->assertTrue(is_array($this->_rbl->getDetails('127.0.0.2')));
+        } 
+        if ($this->_rbl->isListed('79.141.17.68', true)) { 
+            $this->assertTrue(is_array($this->_rbl->getDetails('127.0.0.2')));
+        } 
+    }
 }
 ?>
