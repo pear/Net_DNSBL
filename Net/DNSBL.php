@@ -112,7 +112,7 @@ class Net_DNSBL
      */
     function getDetails($host)
     {
-        if (isset($this->results[$host])) {
+        if (isset($this->results[$host])) {            
             if (count($this->results[$host])>1) {
                 return $this->results[$host];
             } else {
@@ -135,6 +135,13 @@ class Net_DNSBL
     {
         if (isset($this->results[$host]['dnsbl'])) {
             return $this->results[$host]['dnsbl'];
+        } else if (is_array($this->results[$host])) {
+            $result = array_keys($this->results[$host]);
+            if ($result == null) {
+                return false;
+            } else {
+                return 'multiple ('.implode(', ', $result).')';
+            }
         } else {
             return false;
         }

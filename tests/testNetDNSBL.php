@@ -323,5 +323,45 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
             $this->assertTrue(is_array($this->_rbl->getDetails('127.0.0.2')));
         } 
     }
+
+    /**
+     * Test getListingBl() does not break silently if isListed() was
+     * called with 2nd paramter
+     *
+     * @see http://pear.php.net/bugs/bug.php?id=16382
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testGetListingBlDoesNotBreakSilentlyIfHostIsListed()
+    {
+        $this->_rbl->setBlacklists(array('bl.spamcop.net','b.barracudacentral.org'));
+        $ip = '127.0.0.2';
+        $this->assertTrue($this->_rbl->isListed($ip, true));
+        $this->assertEquals(
+            'multiple (bl.spamcop.net, b.barracudacentral.org)', 
+            $this->_rbl->getListingBl($ip)
+        );
+        $this->assertTrue($this->_rbl->isListed($ip));
+        $this->assertEquals('bl.spamcop.net', $this->_rbl->getListingBl($ip));
+    }
+
+    /**
+     * Test getListingBl() does not break silently if isListed() was
+     * called with 2nd paramter
+     *
+     * @see http://pear.php.net/bugs/bug.php?id=16382
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testGetListingBlDoesNotBreakSilentlyIfHostIsNotListed()
+    {
+        $this->_rbl->setBlacklists(array('bl.spamcop.net','b.barracudacentral.org'));
+        $ip = '127.0.0.1';
+        $this->assertFalse($this->_rbl->isListed($ip, true));
+        $this->assertEquals(false, $this->_rbl->getListingBl($ip));
+        $this->assertFalse($this->_rbl->isListed($ip));
+        $this->assertEquals(false, $this->_rbl->getListingBl($ip));
+
+    }
 }
 ?>
