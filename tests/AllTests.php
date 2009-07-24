@@ -29,13 +29,17 @@
  * @since     File available since Release 1.0.0
  */
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Net_DNSBL_AllTests::main');
+}
+
 ini_set('display_errors', 'On');
 
 require_once 'PHPUnit/Framework/TestSuite.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
-require_once 'testNetDNSBL.php';
-require_once 'testNetDNSBLSURBL.php';
+require_once 'TestNetDNSBL.php';
+require_once 'TestNetDNSBLSURBL.php';
 
 /**
  * AllTests
@@ -50,7 +54,7 @@ require_once 'testNetDNSBLSURBL.php';
  * @link     http://pear.php.net/package/net_dnsbl Package Home
  */
 
-class AllTests
+class Net_DNSBL_AllTests
 {
     
     /**
@@ -77,5 +81,9 @@ class AllTests
         $suite->addTestSuite('TestNetDNSBLSURBL');
         return $suite;
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Net_DNSBL_AllTests::main') {
+    Net_DNSBL_AllTests::main();
 }
 ?>
