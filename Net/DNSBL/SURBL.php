@@ -62,7 +62,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL
      * @var    string[]
      * @access protected
      */
-    var $blacklists = array('multi.surbl.org');
+     protected $blacklists = array('multi.surbl.org');
 
     /**
      * File containing whitelisted hosts.
@@ -75,16 +75,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL
      * @see    $twoLevelCcTld
      * @access protected
      */
-    var $doubleCcTldFile = 'http://spamcheck.freeapp.net/two-level-tlds';
-
-    /**
-     * Array of whitelisted hosts.
-     *
-     * @var    array
-     * @see    $twoLevelCcTldFile
-     * @access private
-     */
-    var $twoLevelCcTld = array();
+    protected $doubleCcTldFile = 'http://spamcheck.freeapp.net/two-level-tlds';
 
     /**
      * Check if the last two parts of the FQDN are whitelisted.
@@ -94,7 +85,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL
      * @access protected
      * @return boolean True if the host is whitelisted
      */
-    function isDoubleCcTld($fqdn)
+    protected function isDoubleCcTld($fqdn)
     {
         // 30 Days should be way enough
         $options = array(
@@ -142,7 +133,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL
      * @access protected
      * @return string Host to lookup
      */
-    function getHostForLookup($uri, $blacklist) 
+    protected function getHostForLookup($uri, $blacklist) 
     {
         // (1) Extract the hostname from the given URI
         $host       = '';

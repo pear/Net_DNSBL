@@ -361,7 +361,6 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->_rbl->getListingBl($ip));
         $this->assertFalse($this->_rbl->isListed($ip));
         $this->assertEquals(false, $this->_rbl->getListingBl($ip));
-
     }
 }
 ?>

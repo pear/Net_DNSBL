@@ -61,8 +61,8 @@ class Net_DNSBL
      * @var    array
      * @access protected
      */
-    var $blacklists = array('sbl-xbl.spamhaus.org',
-                            'bl.spamcop.net');
+    protected $blacklists = array('sbl-xbl.spamhaus.org',
+                                  'bl.spamcop.net');
 
     /**     
      * Array of Results
@@ -70,7 +70,7 @@ class Net_DNSBL
      * @var    array
      * @access protected
      */
-    var $results = array();
+    protected $results = array();
 
     /**
      * Set the blacklist to a desired blacklist.
@@ -80,7 +80,7 @@ class Net_DNSBL
      * @access public
      * @return bool true if the operation was successful
      */
-    function setBlacklists($blacklists)
+    public function setBlacklists($blacklists)
     {
         if (is_array($blacklists)) {
             $this->blacklists = $blacklists;
@@ -96,7 +96,7 @@ class Net_DNSBL
      * @access public
      * @return array Currently set blacklists.
      */
-    function getBlacklists()
+    public function getBlacklists()
     {
         return $this->blacklists;
     }
@@ -110,7 +110,7 @@ class Net_DNSBL
      * @return array result. $result['dnsbl'] contains DNSBL,
      *               $result['record'] contains returned DNS record.
      */
-    function getDetails($host)
+    public function getDetails($host)
     {
         if (isset($this->results[$host])) {            
             if (count($this->results[$host])>1) {
@@ -131,7 +131,7 @@ class Net_DNSBL
      * @access public
      * @return bl, a host is listed in or false
      */
-    function getListingBl($host)
+    public function getListingBl($host)
     {
         if (isset($this->results[$host]['dnsbl'])) {
             return $this->results[$host]['dnsbl'];
@@ -156,7 +156,7 @@ class Net_DNSBL
      * @access public
      * @return array blacklists, a host is listed in or false
      */
-    function getListingBls($host)
+    public function getListingBls($host)
     {
         if (is_array($this->results[$host])) {
             $result = array_keys($this->results[$host]);
@@ -178,7 +178,7 @@ class Net_DNSBL
      * @access public
      * @return bl, a host is listed in or false
      */
-    function getListingRecord($host)
+    public function getListingRecord($host)
     {
         if (isset($this->results[$host]['record'])) {
             return $this->results[$host]['record'];
@@ -195,7 +195,7 @@ class Net_DNSBL
      * @access public
      * @return array TXT-Records for this host
      */
-    function getTxt($host)
+    public function getTxt($host)
     {
         if (isset($this->results[$host]['txt'])) {
             return $this->results[$host]['txt'];
@@ -216,7 +216,7 @@ class Net_DNSBL
      * @access public
      * @return boolean true if the checked host is listed in a blacklist.
      */
-    function isListed($host, $checkall = false)
+    public function isListed($host, $checkall = false)
     {
         $isListed = false;
         $resolver = new Net_DNS_Resolver;
@@ -284,7 +284,7 @@ class Net_DNSBL
      * @access protected
      * @return string Ready to use host to lookup
      */    
-    function getHostForLookup($host, $blacklist) 
+    protected function getHostForLookup($host, $blacklist) 
     {
         // Currently only works for v4 addresses.
         if (!Net_CheckIP::check_ip($host)) {
@@ -307,7 +307,7 @@ class Net_DNSBL
      * @access protected
      * @return string Ready to use host to lookup
      */    
-    function buildLookUpHost($ip, $blacklist)
+    protected function buildLookUpHost($ip, $blacklist)
     {
         return $this->reverseIp($ip).'.'.$blacklist;        
     } // function
@@ -321,7 +321,7 @@ class Net_DNSBL
      * @access protected
      * @return string Reversed IP
      */    
-    function reverseIp($ip) 
+    protected function reverseIp($ip) 
     {        
         return implode('.', array_reverse(explode('.', $ip)));        
     } // function

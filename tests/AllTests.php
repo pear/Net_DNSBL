@@ -29,8 +29,8 @@
  * @since     File available since Release 1.0.0
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Net_DNSBL_AllTests::main');
+if (!defined('PHPUNIT_MAIN_METHOD')) {
+    define('PHPUNIT_MAIN_METHOD', 'Net_DNSBL_AllTests::main');
 }
 
 ini_set('display_errors', 'On');
@@ -83,7 +83,7 @@ class Net_DNSBL_AllTests
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Net_DNSBL_AllTests::main') {
+if (PHPUNIT_MAIN_METHOD == 'Net_DNSBL_AllTests::main') {
     Net_DNSBL_AllTests::main();
 }
 ?>

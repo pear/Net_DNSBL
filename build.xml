@@ -73,6 +73,8 @@
     </move>
   </target>
   <target name="update" depends="prepare">
-    <cvs command="up -A -d" />
+    <exec dir="${basedir}" executable="svn" failonerror="true">
+       <arg line="up" />
+    </exec>
   </target>
 </project>
