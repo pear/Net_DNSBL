@@ -112,12 +112,8 @@ class Net_DNSBL
      */
     public function getDetails($host)
     {
-        if (isset($this->results[$host])) {            
-            if (count($this->results[$host])>1) {
-                return $this->results[$host];
-            } else {
-                return $this->results[$host][0];
-            }
+        if (isset($this->results[$host])) {
+            return $this->results[$host];
         } else {
             return false;
         }
