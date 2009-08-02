@@ -26,7 +26,8 @@
     <api>stable</api>
   </stability>
   <license uri="http://www.php.net/license">PHP License</license>
-  <notes>* Fix #16382 - getListingBL() breaks silently if isListed() was called with 2nd parameter
+  <notes>* Fix Bug #16382 - getListingBL() breaks silently if isListed() was called with 2nd parameter
+* Fix Bug #16383 - getDetails() returns no results if 1 result
 * Switch to PHP 5.x object style
 * Fix PEAR Coding Standard issues</notes>
   <contents>
