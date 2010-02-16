@@ -131,16 +131,17 @@ class Net_DNSBL
     {
         if (isset($this->results[$host]['dnsbl'])) {
             return $this->results[$host]['dnsbl'];
-        } else if (is_array($this->results[$host])) {
+        }
+
+        if (isset($this->results[$host]) && is_array($this->results[$host])) {
             $result = array_keys($this->results[$host]);
             if ($result == null) {
                 return false;
-            } else {
-                return 'multiple ('.implode(', ', $result).')';
             }
-        } else {
-            return false;
+
+            return 'multiple ('.implode(', ', $result).')';          
         }
+        return false;
     } // function
 
     /**
@@ -154,16 +155,17 @@ class Net_DNSBL
      */
     public function getListingBls($host)
     {
-        if (is_array($this->results[$host])) {
+        if (isset($this->results[$host]) && is_array($this->results[$host])) {
             $result = array_keys($this->results[$host]);
             if ($result == null) {
                 return false;
-            } else {
-                return $result;
             }
-        } else {
-            return false;
+
+            return $result;           
         }
+
+        return false;
+        
     } // function
 
     /**

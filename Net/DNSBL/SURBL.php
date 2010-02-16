@@ -138,6 +138,11 @@ class Net_DNSBL_SURBL extends Net_DNSBL
         // (1) Extract the hostname from the given URI
         $host       = '';
         $parsed_uri = parse_url($uri);
+
+        if (empty($parsed_uri['host'])) {
+            return false;
+        }
+
         $host       = urldecode($parsed_uri['host']);
         // (2) Check if the "hostname" is an ip
         if (Net_CheckIP::check_ip($host)) {
