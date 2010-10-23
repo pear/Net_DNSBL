@@ -288,7 +288,7 @@ class Net_DNSBL
         if (!Net_CheckIP::check_ip($host)) {
             $resolver = new Net_DNS_Resolver;
             $response = $resolver->query($host);
-            $ip       = $response->answer[0]->address;
+            $ip       = $response?$response->answer[0]->address:null;
         } else {
             $ip = $host;
         }

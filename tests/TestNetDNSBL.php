@@ -112,7 +112,7 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
         $this->_rbl->setBlacklists(array('dnsbl.sorbs.net'));
         $this->assertEquals(array('dnsbl.sorbs.net'), $this->_rbl->getBlacklists());
         $this->assertFalse($this->_rbl->isListed("mail.nohn.net"));
-        $this->assertTrue($this->_rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertTrue($this->_rbl->isListed("88.77.163.166"));
     }
 
     /**
@@ -123,16 +123,16 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
     public function testGetDetails()
     {
         $this->_rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertTrue($this->_rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertTrue($this->_rbl->isListed("88.77.163.166"));
         $this->assertEquals(
             array(
             "dnsbl" => "dnsbl.sorbs.net", 
             "record" => "127.0.0.10", 
             "txt" => array(
                 0 => "Dynamic IP Addresses See: ".
-                     "http://www.sorbs.net/lookup.shtml?80.146.116.100"
+                     "http://www.sorbs.net/lookup.shtml?88.77.163.166"
                 )
-            ), $this->_rbl->getDetails("p50927464.dip.t-dialin.net")
+            ), $this->_rbl->getDetails("88.77.163.166")
         );
         $this->assertFalse($this->_rbl->getDetails("mail.nohn.net"));
         $this->assertFalse($this->_rbl->getDetails("somehost.we.never.queried"));
@@ -146,10 +146,10 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
     public function testGetListingBl()
     {
         $this->_rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertTrue($this->_rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertTrue($this->_rbl->isListed("88.77.163.166"));
         $this->assertEquals(
             "dnsbl.sorbs.net", 
-            $this->_rbl->getListingBl("p50927464.dip.t-dialin.net")
+            $this->_rbl->getListingBl("88.77.163.166")
         );
         $this->assertFalse($this->_rbl->getListingBl("www.google.de"));
     }
@@ -162,10 +162,10 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
     public function testGetListingRecord()
     {
         $this->_rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertTrue($this->_rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertTrue($this->_rbl->isListed("88.77.163.166"));
         $this->assertEquals(
             "127.0.0.10", 
-            $this->_rbl->getListingRecord("p50927464.dip.t-dialin.net")
+            $this->_rbl->getListingRecord("88.77.163.166")
         );
         $this->assertFalse($this->_rbl->getListingRecord("www.google.de"));
     }
@@ -178,15 +178,15 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
     public function testGetTxt()
     {
         $this->_rbl->setBlacklists(array('dnsbl.sorbs.net'));
-        $this->assertTrue($this->_rbl->isListed("p50927464.dip.t-dialin.net"));
+        $this->assertTrue($this->_rbl->isListed("88.77.163.166"));
         $this->assertEquals(
             "127.0.0.10", 
-            $this->_rbl->getListingRecord("p50927464.dip.t-dialin.net")
+            $this->_rbl->getListingRecord("88.77.163.166")
         );
         $this->assertEquals(
             array(0 => "Dynamic IP Addresses See: ".
-                       "http://www.sorbs.net/lookup.shtml?80.146.116.100"), 
-            $this->_rbl->getTxt("p50927464.dip.t-dialin.net")
+                       "http://www.sorbs.net/lookup.shtml?88.77.163.166"), 
+            $this->_rbl->getTxt("88.77.163.166")
         );
         $this->assertFalse($this->_rbl->getTxt("www.google.de"));
     }

@@ -22,7 +22,7 @@
   <target name="phpcpd">
     <exec dir="${basedir}" executable="phpcpd" 
           failonerror="false">
-      <arg line="--log-pmd=${basedir}/build/logs/phpcpd.xml ."/>
+      <arg line="--log-pmd ${basedir}/build/logs/phpcpd.xml ."/>
     </exec>
   </target>
   <target name="pdepend">
@@ -36,8 +36,7 @@
     <exec dir="${basedir}" executable="phpunit" failonerror="true">
         <arg line="-d include_path=.:${basedir}:/opt/php/lib/php:/usr/share/php 
                    --coverage-clover ${basedir}/build/logs/clover.xml
-                   --log-xml         ${basedir}/build/logs/phpunit_test_net_dnsbl.xml 
-                   --coverage-xml    ${basedir}/build/logs/coverage.xml
+                   --log-junit       ${basedir}/build/logs/phpunit_test_net_dnsbl.xml 
                    --coverage-html   ${basedir}/build/deliv/coverage
                    --stop-on-failure
                    AllTests tests/AllTests.php"/>
