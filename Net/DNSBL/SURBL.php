@@ -7,7 +7,7 @@
  * This class acts as interface to generic Realtime Blocking Lists
  * (RBL)
  *
- * PHP versions 4 and 5
+ * PHP versions 5
  *
  * LICENSE: This source file is subject to version 3.01 of the PHP license
  * that is available through the world-wide-web at the following URI:
@@ -22,7 +22,7 @@
  * @package   Net_DNSBL
  * @author    Sebastian Nohn <sebastian@nohn.net>
  * @author    Ammar Ibrahim <fixxme@fixme.com>
- * @copyright 2004-2009 Sebastian Nohn <sebastian@nohn.net>
+ * @copyright 2004-2010 Sebastian Nohn <sebastian@nohn.net>
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Net_DNSBL
