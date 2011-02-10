@@ -284,12 +284,15 @@ class Net_DNSBL
     protected function getHostForLookup($host, $blacklist) 
     {
         // Currently only works for v4 addresses.
-        if (!Net_CheckIP::check_ip($host)) {
-            $resolver = new Net_DNS_Resolver;
-            $response = $resolver->query($host);
-            $ip       = $response?$response->answer[0]->address:null;
-        } else {
-            $ip = $host;
+        if (filter_var($host, FILTER_VALIDATE_IP)) {
+					$ip = $host;
+				} else {
+          $resolver = new Net_DNS_Resolver;
+          $response = $resolver->query($host);
+          $ip       = isset($response->answer[0]->address)?$response->answer[0]->address:NULL;
+        }
+        if (!$ip || !filter_var($ip, FILTER_VALIDATE_IP)) {
+          return;
         }
 
         return $this->buildLookUpHost($ip, $blacklist);

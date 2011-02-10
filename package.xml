@@ -74,11 +74,6 @@ QA release
     <min>1.0.0</min>
    </package>
    <package>
-    <name>Net_CheckIP</name>
-    <channel>pear.php.net</channel>
-    <min>1.1</min>
-   </package>
-   <package>
     <name>HTTP_Request</name>
     <channel>pear.php.net</channel>
     <min>1.2.3</min>
