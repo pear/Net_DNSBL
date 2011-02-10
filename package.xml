@@ -40,7 +40,7 @@ QA release
    <file baseinstalldir="/" md5sum="1cea49f6ec0b3f11fcf34d8a16ab900f" name="Net/DNSBL.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="26c412d9d6904041c9a412b421a66199" name="Net/DNSBL/SURBL.php" role="php">
+   <file baseinstalldir="/" md5sum="4d39460bd182755f0b1f412e19e2eeee" name="Net/DNSBL/SURBL.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="c0740041e89807716f46fd47794d2af6" name="tests/AllTests.php" role="test">

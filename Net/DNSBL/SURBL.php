@@ -31,7 +31,7 @@
  */
 
 require_once 'Cache/Lite.php';
-require_once 'HTTP/Request.php';
+require_once 'HTTP/Request2.php';
 require_once 'Net/DNSBL.php';
 
 /**
