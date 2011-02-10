@@ -32,7 +32,6 @@
 
 require_once 'Cache/Lite.php';
 require_once 'HTTP/Request.php';
-require_once 'Net/CheckIP.php';
 require_once 'Net/DNSBL.php';
 
 /**
@@ -145,7 +144,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL
 
         $host       = urldecode($parsed_uri['host']);
         // (2) Check if the "hostname" is an ip
-        if (Net_CheckIP::check_ip($host)) {
+        if (filter_var($host, FILTER_VALIDATE_IP)) {
             // (3a) IS_IP Reverse the IP (1.2.3.4 -> 4.3.2.1)
             $host = $this->reverseIp($host);
         } else {
