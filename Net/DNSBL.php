@@ -326,5 +326,9 @@ class Net_DNSBL
         return implode('.', array_reverse(explode('.', $ip)));        
     } // function
 
+    public function setResults($results = array())
+    {
+        $this->results = $results;
+    }
 } // class
 ?>
