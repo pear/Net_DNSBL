@@ -285,14 +285,15 @@ class Net_DNSBL
     {
         // Currently only works for v4 addresses.
         if (filter_var($host, FILTER_VALIDATE_IP)) {
-					$ip = $host;
-				} else {
-          $resolver = new Net_DNS_Resolver;
-          $response = $resolver->query($host);
-          $ip       = isset($response->answer[0]->address)?$response->answer[0]->address:NULL;
+                                        $ip = $host;
+        } else {
+            $resolver = new Net_DNS_Resolver;
+            $response = $resolver->query($host);
+            $ip       = isset($response->answer[0]->address) ? 
+                        $response->answer[0]->address : null;
         }
         if (!$ip || !filter_var($ip, FILTER_VALIDATE_IP)) {
-          return;
+            return;
         }
 
         return $this->buildLookUpHost($ip, $blacklist);
@@ -326,7 +327,15 @@ class Net_DNSBL
         return implode('.', array_reverse(explode('.', $ip)));        
     } // function
 
-    public function setResults($results = array())
+    /**
+     * Setter for results
+     *
+     * @param array $results Results array
+     *
+     * @access protected
+     * @return void
+     */
+    protected function setResults($results = array())
     {
         $this->results = $results;
     }
