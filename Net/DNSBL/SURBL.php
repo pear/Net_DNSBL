@@ -22,7 +22,7 @@
  * @package   Net_DNSBL
  * @author    Sebastian Nohn <sebastian@nohn.net>
  * @author    Ammar Ibrahim <fixxme@fixme.com>
- * @copyright 2004-2010 Sebastian Nohn <sebastian@nohn.net>
+ * @copyright 2004-2011 Sebastian Nohn <sebastian@nohn.net>
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Net_DNSBL
@@ -33,6 +33,7 @@
 require_once 'Cache/Lite.php';
 require_once 'HTTP/Request2.php';
 require_once 'Net/DNSBL.php';
+require_once 'PEAR.php';
 
 /**
  * PEAR::Net_DNSBL_SURBL
@@ -98,9 +99,9 @@ class Net_DNSBL_SURBL extends Net_DNSBL
             // Cache hit
         } else {
             // Cache miss
-            $http = new HTTP_Request($this->doubleCcTldFile);
-            if (!PEAR::isError($http->sendRequest())) {
-                $data = $http->getResponseBody();
+            $http = new HTTP_Request2($this->doubleCcTldFile);
+            if (!PEAR::isError($http->send())) {
+                $data = $http->getBody();
             }
             $data = explode("\n", $data);
             $data = array_flip($data);

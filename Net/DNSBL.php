@@ -23,7 +23,7 @@
  * @package   Net_DNSBL
  * @author    Sebastian Nohn <sebastian@nohn.net>
  * @author    Ammar Ibrahim <fixxme@fixme.com>
- * @copyright 2004-2010 Sebastian Nohn <sebastian@nohn.net>
+ * @copyright 2004-2011 Sebastian Nohn <sebastian@nohn.net>
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Net_DNSBL
