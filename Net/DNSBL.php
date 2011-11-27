@@ -326,18 +326,5 @@ class Net_DNSBL
     {        
         return implode('.', array_reverse(explode('.', $ip)));        
     } // function
-
-    /**
-     * Setter for results
-     *
-     * @param array $results Results array
-     *
-     * @access protected
-     * @return void
-     */
-    protected function setResults($results = array())
-    {
-        $this->results = $results;
-    }
 } // class
 ?>
