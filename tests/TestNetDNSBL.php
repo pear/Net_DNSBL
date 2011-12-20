@@ -84,7 +84,7 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
      */
     public function testTrustworthyHostsArentListed()
     {
-        $this->_rbl->setBlacklists(array('dun.dnsrbl.net'));
+        $this->_rbl->setBlacklists(array('sbl.spamhaus.org'));
         $this->assertFalse($this->_rbl->isListed("mail.nohn.net"));
         $this->assertFalse($this->_rbl->isListed("212.112.226.205"));
         $this->assertFalse($this->_rbl->isListed("smtp1.google.com"));
@@ -97,8 +97,8 @@ class TestNetDNSBL extends PHPUnit_Framework_TestCase
      */
     public function testSetters()
     {
-        $this->assertTrue($this->_rbl->setBlacklists(array('dun.dnsrbl.net')));
-        $this->assertEquals(array('dun.dnsrbl.net'), $this->_rbl->getBlacklists());
+        $this->assertTrue($this->_rbl->setBlacklists(array('sbl.spamhaus.org')));
+        $this->assertEquals(array('sbl.spamhaus.org'), $this->_rbl->getBlacklists());
         $this->assertFalse($this->_rbl->setBlacklists('dnsbl.sorbs.net'));
     }
 

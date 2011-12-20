@@ -26,7 +26,7 @@
  * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Net_DNSBL
- * @see       Net_DNS
+ * @see       Net_DNS2
  * @since     File available since Release 1.0.0
  */
 
