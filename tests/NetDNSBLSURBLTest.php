@@ -45,7 +45,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @link     http://pear.php.net/package/net_dnsbl Package Home
  */
 
-class TestNetDNSBLSURBL extends PHPUnit_Framework_TestCase
+class NetDNSBLSURBLTest extends PHPUnit_Framework_TestCase
 {
     private $_surbl;
 
