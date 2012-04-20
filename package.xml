@@ -22,10 +22,10 @@
     <email>hm2k@php.net</email>
     <active>yes</active>
   </developer>
-  <date>2011-12-25</date>
-  <time>12:58:00</time>
+  <date>2012-04-20</date>
+  <time>06:27:00</time>
   <version>
-    <release>1.3.6</release>
+    <release>1.3.7</release>
     <api>1.3.0</api>
   </version>
   <stability>
@@ -34,7 +34,7 @@
   </stability>
   <license uri="http://www.php.net/license">PHP License</license>
   <notes>
-* Fix Bug Bug #19154 package.xml needs update [nohn]
+   * Fix #19382
  </notes>
   <contents>
     <dir baseinstalldir="/" name="/">
@@ -55,13 +55,10 @@
       </dir>
       <!-- /Net -->
       <dir name="tests">
-        <file baseinstalldir="/" name="AllTests.php" role="test">
+        <file baseinstalldir="/" name="NetDNSBLSURBLTest.php" role="test">
           <tasks:replace from="@package_version@" to="version" type="package-info"/>
         </file>
-        <file baseinstalldir="/" name="TestNetDNSBL.php" role="test">
-          <tasks:replace from="@package_version@" to="version" type="package-info"/>
-        </file>
-        <file baseinstalldir="/" name="TestNetDNSBLSURBL.php" role="test">
+        <file baseinstalldir="/" name="NetDNSBLTest.php" role="test">
           <tasks:replace from="@package_version@" to="version" type="package-info"/>
         </file>
       </dir>
@@ -97,6 +94,21 @@
   </dependencies>
   <phprelease/>
   <changelog>
+    <release>
+      <version>
+        <release>1.3.7</release>
+        <api>1.3.0</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <date>2012-04-20</date>
+      <license uri="http://www.php.net/license">PHP License</license>
+      <notes>
+* Fix #19382 - http://spamcheck.freeapp.net/ is down
+   </notes>
+    </release>
     <release>
       <version>
         <release>1.3.4dev</release>
