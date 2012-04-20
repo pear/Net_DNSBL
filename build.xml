@@ -39,7 +39,7 @@
                    --log-junit       ${basedir}/build/logs/phpunit_test_net_dnsbl.xml 
                    --coverage-html   ${basedir}/build/deliv/coverage
                    --stop-on-failure
-                   AllTests tests/AllTests.php"/>
+                     tests/"/>
     </exec>
   </target>
 
