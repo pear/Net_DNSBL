@@ -71,7 +71,7 @@ class NetDNSBLTest extends PHPUnit_Framework_TestCase
             $this->_rbl->getTxt('127.0.0.2')
         );
         $this->assertContains(
-            "http://www.spamhaus.org/SBL/sbl.lasso?query=SBL233", 
+            "http://www.spamhaus.org/sbl/query/SBL233", 
             $this->_rbl->getTxt('127.0.0.2')
         );
     }
@@ -250,7 +250,7 @@ class NetDNSBLTest extends PHPUnit_Framework_TestCase
             $result['sbl-xbl.spamhaus.org']['record']
         );
         $this->assertContains(
-            'http://www.spamhaus.org/SBL/sbl.lasso?query=SBL233', 
+            'http://www.spamhaus.org/sbl/query/SBL233', 
             $result['sbl-xbl.spamhaus.org']['txt']
         );
         $this->assertContains(
