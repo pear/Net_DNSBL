@@ -73,13 +73,13 @@ class NetDNSBLSURBLTest extends PHPUnit_Framework_TestCase
                 'http://dbltest.com/demo'
             )
         );
-	$this->assertEquals(array(0 => 'http://www.spamhaus.org/query/dbl?domain=dbltest.com'), $this->_surbl->getTxt('http://dbltest.com/demo'));
+        $this->assertEquals(array(0 => 'http://www.spamhaus.org/query/dbl?domain=dbltest.com'), $this->_surbl->getTxt('http://dbltest.com/demo'));
         $this->assertFalse(
             $this->_surbl->isListed(
                 'http://example.com/demo'
             )
         );
-	$this->assertEquals(false, $this->_surbl->getTxt('http://example.com/demo'));
+        $this->assertEquals(false, $this->_surbl->getTxt('http://example.com/demo'));
     }
     
     /**
