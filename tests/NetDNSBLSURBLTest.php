@@ -58,6 +58,29 @@ class NetDNSBLSURBLTest extends PHPUnit_Framework_TestCase
     {
         $this->_surbl = new Net_DNSBL_SURBL;
     }
+
+    /**
+     * Tests if a URL is always correctly identified as such when
+     * using DBL
+     *
+     * @return boolean true on success, false on failure
+     */
+    public function testDblAlsoWorksForSURBL()
+    {
+        $this->_surbl->setBlacklists(array('dbl.spamhaus.org'));
+        $this->assertTrue(
+            $this->_surbl->isListed(
+                'http://dbltest.com/demo'
+            )
+        );
+	$this->assertEquals(array(0 => 'http://www.spamhaus.org/query/dbl?domain=dbltest.com'), $this->_surbl->getTxt('http://dbltest.com/demo'));
+        $this->assertFalse(
+            $this->_surbl->isListed(
+                'http://example.com/demo'
+            )
+        );
+	$this->assertEquals(false, $this->_surbl->getTxt('http://example.com/demo'));
+    }
     
     /**
      * Tests if a test spam URL is always correctly identified as such. 
